@@ -1,15 +1,7 @@
 import ReactDOM from 'react-dom';
-import HomePage from './pages/HomePage/HomePage';
-import ListTreatmentCategory from './pages/ListTreatmentCategory/ListTreatmentCategory';
-
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import App from './pages/App';
 
 ReactDOM.render(
-	<BrowserRouter>
-		<Switch>
-			<Route path="/" component={HomePage} />
-			<Route path="/patient" component={ListTreatmentCategory}/>
-		</Switch>
-	</BrowserRouter>,
+	<App />,
 	document.getElementById('root')
 )
