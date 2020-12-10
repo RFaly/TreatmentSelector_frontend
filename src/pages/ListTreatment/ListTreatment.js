@@ -1,16 +1,24 @@
 import React from 'react';
 
-class ListTreatment extends React.Component {
-	render(){
-		return(
-			<div>
-				<p>Mdsmfkjsdl kq fsdkfjmsd</p>
-				<p>Mdsmfkjsdl kq fsdkfjmsd</p>
-				<p>Mdsmfkjsdl kq fsdkfjmsd</p>
-				<p>Mdsmfkjsdl kq fsdkfjmsd</p>
-			</div>
-		)
-	}
+function ListTreatment({treatmentCategory,selectTreatmentCategory}){
+	return(
+		<div>
+			<h2><FaListAlt />{treatmentCategory.nameEn}</h2>
+			{
+				treatmentCategory.treatments.map(treatment => {
+					<div key={treatment.id}>
+			            <div>{treatment.nameEn}</div>
+			            <div>{treatment.nameFr}</div>
+			            <div>{treatment.nameMg}</div>
+					</div>
+					<hr />
+				})
+			}
+			<button onClick={selectTreatmentCategory.bind(this,null)}>
+				Back
+			</button>
+		</div>
+	)
 }
 
 export default ListTreatment
