@@ -14,6 +14,7 @@ class App extends React.Component {
 
 	selectTreatmentCategory = (treatmentCategory) => {
 		this.setState({selectedTreatmentCategory: treatmentCategory})
+		console.log("nanonava state")
 	}
 
 	render(){
@@ -21,12 +22,13 @@ class App extends React.Component {
 			<BrowserRouter>
 				<SideBar />
 				<Switch>
-					<Route path="/patient" render={
-						this.state.selectedTreatmentCategory ?
-						<ListTreatment treatmentCategory={this.state.treatmentCategory} selectTreatmentCategory={this.selectTreatmentCategory} /> : 
-						<ListTreatmentCategory selectTreatmentCategory={this.selectTreatmentCategory} />
-					} />
-
+					<Route path="/patient">
+						{
+							this.state.selectedTreatmentCategory ?
+							<ListTreatment treatmentCategory={this.state.selectedTreatmentCategory} selectTreatmentCategory={this.selectTreatmentCategory} />:
+							<ListTreatmentCategory selectTreatmentCategory={this.selectTreatmentCategory} />
+						}
+					</Route>
 					<Route path="/doctor" component={HomePage} />
 					<Route path="/" component={HomePage} />
 				</Switch>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TreatmentCategory from './Components/TreatmentCategory';
 
 // ~~~~~~~~~~~~~~~~~~~~~~~
@@ -26,15 +26,18 @@ function ListTreatmentCategory({selectTreatmentCategory}){
 	const {loading, error, data} = useQuery(GET_TREATMENT_CATEGORIES);
 	if (loading) return 'Loading ...';
 	if (error) return `Error ${error.message}`;
+
+	window.datas = data
+
 	return(
 		<div>
 			{
-				data.treatmentCategories.map(treatmentCategory => {
+				data.treatmentCategories.map(treatmentCategory => (
 					<div key={treatmentCategory.id} onClick={selectTreatmentCategory.bind(this,treatmentCategory)} >
 						<TreatmentCategory treatmentCategory={treatmentCategory} />
+						<hr />
 					</div>
-					<hr />
-				})
+				))
 			}
 		</div>
 	)
