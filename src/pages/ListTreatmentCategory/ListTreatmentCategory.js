@@ -3,32 +3,13 @@ import TreatmentCategory from './Components/TreatmentCategory';
 
 // ~~~~~~~~~~~~~~~~~~~~~~~
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-
-const GET_TREATMENT_CATEGORIES = gql`
-	{
-	  treatmentCategories{
-	    id,
-	    nameEn,
-	    nameFr,
-	    nameMg,
-	    treatments {
-	      id,
-	      nameEn,
-	      nameFr,
-	      nameMg
-	    }
-	  }
-	}
-`;
+import { TREATMENT_CATEGORIES } from '../../services/queries/TreatmentCategoriesQueries'
 
 function ListTreatmentCategory({selectTreatmentCategory}){
-	const {loading, error, data} = useQuery(GET_TREATMENT_CATEGORIES);
+	const {loading, error, data} = useQuery(TREATMENT_CATEGORIES);
 	if (loading) return 'Loading ...';
 	if (error) return `Error ${error.message}`;
-
-	window.datas = data
-
+	
 	return(
 		<div>
 			{

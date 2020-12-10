@@ -14,7 +14,6 @@ class App extends React.Component {
 
 	selectTreatmentCategory = (treatmentCategory) => {
 		this.setState({selectedTreatmentCategory: treatmentCategory})
-		console.log("nanonava state")
 	}
 
 	render(){
