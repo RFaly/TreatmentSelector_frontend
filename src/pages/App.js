@@ -19,7 +19,7 @@ class App extends React.Component {
 	render(){
 		return(
 			<BrowserRouter>
-				<SideBar />
+				<SideBar selectTreatmentCategory={this.selectTreatmentCategory} />
 				<Switch>
 					<Route path="/patient">
 						{
