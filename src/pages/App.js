@@ -4,8 +4,8 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import HomePage from './HomePage/HomePage';
 import SideBar from './SideBar/SideBar';
 
-import ListTreatmentCategory from './ListTreatmentCategory/ListTreatmentCategory';
-import ListTreatment from './ListTreatment/ListTreatment';
+import ListTreatmentCategory from './Patient/ListTreatmentCategory';
+import ListTreatment from './Patient/ListTreatment';
 
 class App extends React.Component {
 	state = {
