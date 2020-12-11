@@ -2,7 +2,8 @@ import React from 'react';
 import TreatmentCategory from './Components/TreatmentCategory';
 
 // ~~~~~~~~~~~~~~~~~~~~~~~
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
+
 import { TREATMENT_CATEGORIES } from '../../services/queries/TreatmentCategoriesQueries'
 
 function ListTreatmentCategory({selectTreatmentCategory}){
