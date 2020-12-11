@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client';
 
 const CREATE_TREATMENT = gql`
-	mutation createTreatment($nameEn: String!, $nameFr: String!, $nameMg: String!, $treatmentCategoryId: int!){
+	mutation createTreatment($nameEn: String!, $nameFr: String!, $nameMg: String!, $treatmentCategoryId: Int!){
 		createTreatment(input:{
-			nameEn: $nameEn
-	    	nameFr: $nameFr
-	    	nameMg: $nameMg
+			nameEn: $nameEn,
+	    	nameFr: $nameFr,
+	    	nameMg: $nameMg,
 	    	treatmentCategoryId: $treatmentCategoryId
 		}){
 			treatment {
@@ -20,7 +20,7 @@ const CREATE_TREATMENT = gql`
 `;
 
 const UPDATE_TREATMENT = gql`
-	mutation updateTreatment($treatmentId: int!, $nameEn: String!, $nameFr: String!, $nameMg: String!){
+	mutation updateTreatment($treatmentId: ID!, $nameEn: String!, $nameFr: String!, $nameMg: String!){
 		updateTreatment(input:{
 			treatmentId: $treatmentId,
 			nameEn: $nameEn,
@@ -39,7 +39,7 @@ const UPDATE_TREATMENT = gql`
 `;
 
 const DESTROY_TREATMENT = gql`
-	mutation destroyTreatment($treatmentId: int!){
+	mutation destroyTreatment($treatmentId: ID!){
 		destroyTreatment(input:{
 			treatmentId: $treatmentId
 		}){

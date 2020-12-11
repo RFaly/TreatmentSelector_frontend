@@ -6,7 +6,7 @@ import { CREATE_PATIENT } from '../../../services/mutations/MutationsPatient';
 
 function CreatePatient({treatmentId}) {
 	// const [addTodo, { data }] = useMutation(CREATE_PATIENT);
-  const [ addTodo, { data: mutationsData, loading: mutationLoading, error: mutationError }] = useMutation(CREATE_PATIENT);
+  	const [ addTodo, { data: mutationsData, loading: mutationLoading, error: mutationError }] = useMutation(CREATE_PATIENT);
 
 	const [params, setParams] = useState({name:'',id:treatmentId});
 
@@ -31,7 +31,6 @@ function CreatePatient({treatmentId}) {
 	        {mutationsData && <p>Donné sauvegardé</p>}
 	    </div>
 	)
-
 }
 
 export default CreatePatient
