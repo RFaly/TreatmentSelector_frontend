@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import App from './pages/App';
 
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider } from '@apollo/client';
 
 import client from './services/GqlConnection'
 

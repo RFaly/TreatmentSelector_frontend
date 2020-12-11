@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 
 const CREATE_TREATMENT = gql`
 	mutation createTreatment($nameEn: String!, $nameFr: String!, $nameMg: String!, $treatmentCategoryId: int!){
