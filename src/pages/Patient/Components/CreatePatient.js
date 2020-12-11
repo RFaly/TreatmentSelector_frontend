@@ -20,10 +20,17 @@ function CreatePatient({treatmentId}) {
 		addTodo({ variables: { name:params.name , treatmentId: parseInt(params.id) } });
 	}
 
+	if (mutationsData){
+		console.log("dsfsdf",mutationsData)
+	}
+
 	return(
 		<div>
 			<form onSubmit={ (e) => { createPatientMutation(e) }}>
-				<input type="text" id="name_patient" name="name" defaultValue={params.name} onChange={(e)=>{changeParams(e)}}/>
+				<div className="row">
+					<input className="form-control" placeholder="Full Name" type="text" id="name_patient" name="name" defaultValue={params.name} onChange={(e)=>{changeParams(e)}}/>
+				</div>
+
 				<button type="submit">Confirm</button>
 			</form>
 			{mutationLoading && <p>Loading...</p>}

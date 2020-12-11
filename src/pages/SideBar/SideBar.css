@@ -1,0 +1,19 @@
+#my-side-bar{
+	left: 0;
+	position: fixed;
+	height: 80%;
+	width: 30%;
+	margin-left: 10px;	
+}
+.my-icones{
+	margin: 5px 0;
+}
+.my-icones svg{
+	width: 40px;
+	height: 40px;
+	color: #fff;
+}
+
+.my-icones a{
+	background-color: #e84d72;
+}

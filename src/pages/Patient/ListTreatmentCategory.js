@@ -3,8 +3,6 @@ import { useQuery } from '@apollo/client';
 import { TREATMENT_CATEGORIES } from '../../services/queries/TreatmentCategoriesQueries'
 import { FaPlusSquare } from 'react-icons/fa'
 
-
-
 import TreatmentCategory from './Components/TreatmentCategory';
 import CreateTreatmentCategory from '../Dashboard/CreateTreatmentCategory'
 

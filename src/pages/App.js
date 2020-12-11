@@ -20,24 +20,28 @@ class App extends React.Component {
 	render(){
 		return(
 			<BrowserRouter>
-				<SideBar selectTreatmentCategory={this.selectTreatmentCategory} />
-				<Switch>
-					<Route path="/patient">
-						{
-							this.state.selectedTreatmentCategory ?
-							<ListTreatment pathName="/patient" treatmentCategory={this.state.selectedTreatmentCategory} selectTreatmentCategory={this.selectTreatmentCategory} />:
-							<ListTreatmentCategory selectTreatmentCategory={this.selectTreatmentCategory} />
-						}
-					</Route>
-					<Route path="/doctor">
-						{
-							this.state.selectedTreatmentCategory ?
-							<ListTreatment pathName="/doctor" treatmentCategory={this.state.selectedTreatmentCategory} selectTreatmentCategory={this.selectTreatmentCategory} />:
-							<ListTreatmentCategory selectTreatmentCategory={this.selectTreatmentCategory} />
-						}
-					</Route>
-					<Route path="/" component={HomePage} />
-				</Switch>
+				<nav >
+					<SideBar selectTreatmentCategory={this.selectTreatmentCategory} />
+				</nav>
+				<div id="main-div" className="d-flex flex-wrap justify-content-center align-items-center" >
+					<Switch>
+						<Route path="/patient">
+							{
+								this.state.selectedTreatmentCategory ?
+								<ListTreatment pathName="/patient" treatmentCategory={this.state.selectedTreatmentCategory} selectTreatmentCategory={this.selectTreatmentCategory} />:
+								<ListTreatmentCategory selectTreatmentCategory={this.selectTreatmentCategory} />
+							}
+						</Route>
+						<Route path="/doctor">
+							{
+								this.state.selectedTreatmentCategory ?
+								<ListTreatment pathName="/doctor" treatmentCategory={this.state.selectedTreatmentCategory} selectTreatmentCategory={this.selectTreatmentCategory} />:
+								<ListTreatmentCategory selectTreatmentCategory={this.selectTreatmentCategory} />
+							}
+						</Route>
+						<Route path="/" component={HomePage} />
+					</Switch>
+				</div>
 			</BrowserRouter>
 		)
 	}
