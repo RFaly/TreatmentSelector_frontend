@@ -1,13 +1,13 @@
 import React from 'react';
-import { FaList } from 'react-icons/fa';
+import { FaChevronDown } from 'react-icons/fa';
 
 const TreatmentCategory = ({treatmentCategory}) => {
 	return(
-		<div>
-			<h2><FaList />{treatmentCategory.nameEn}</h2>
-			<hr />
-		</div>
+		<React.Fragment>
+			<FaChevronDown className="rose" /> {treatmentCategory.nameEn} <span className="badge badge-primary badge-pill">{treatmentCategory.countTreatments}</span>
+		</React.Fragment>
 	)
 }
 
 export default TreatmentCategory
+

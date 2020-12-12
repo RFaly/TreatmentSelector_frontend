@@ -7,6 +7,7 @@ const TREATMENT_CATEGORIES = gql`
 	    nameEn,
 	    nameFr,
 	    nameMg,
+	    countTreatments,
 	    treatments {
 	      id,
 	      nameEn,

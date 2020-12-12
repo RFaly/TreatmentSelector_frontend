@@ -5,9 +5,8 @@ const FormConfirmed = ({treatment,canceledChoice}) => {
 
 	return(
 		<div>
-            <h2>{treatment.nameEn}</h2>
-            <CreatePatient treatmentId={treatment.id} />
-			<div><strong onClick={canceledChoice.bind(this,null)}>Canceled</strong></div>
+            <h2>Traitement demandé: "{treatment.nameEn}"</h2>
+            <CreatePatient canceledChoice={canceledChoice} treatmentId={treatment.id} />
 		</div>
 	)
 }

@@ -1,9 +1,7 @@
 import React from 'react';
-import { FaPlusSquare } from 'react-icons/fa'
 
 import Treatment from './Components/Treatment'
 import FormConfirmed from './Components/FormConfirmed'
-
 import CreateTreatment from '../Dashboard/CreateTreatment'
 
 class ListTreatment extends React.Component {
@@ -21,35 +19,41 @@ class ListTreatment extends React.Component {
 		this.setState({treatment: value})
 	}
 
+
 	render(){
 		return(
-			<div>
-				{this.state.treatment?
-				<FormConfirmed treatment={this.state.treatment} canceledChoice={this.canceledChoice} />:
-				<div>
-					<h2>{this.props.treatmentCategory.nameEn}</h2>
-					{
-						this.props.treatmentCategory.treatments.map(treatment => (
-							<React.Fragment key={treatment.id}>
-								<div onClick={ this.state.path === '/doctor' ? null :
-								e => this.canceledChoice(treatment)}>
-									<Treatment treatment={treatment} />
-								</div>
-							</React.Fragment>
-						))
-					}
-					<button onClick={this.props.selectTreatmentCategory.bind(this,null)}>
-						Back
-					</button>
-				</div>}
+			<div className="text-center">
 				{
-					this.state.path=='/doctor' ? (
-					<div>
-						{
-							this.state.addTC ? <CreateTreatment treatmentCategory={this.props.treatmentCategory} addTreatment={this.addTreatment}/> : <FaPlusSquare onClick={() => this.addTreatment()}/>
-						}
-					</div>
-				) : null
+					this.props.match.path=='/doctor' ? (
+						<CreateTreatment treatmentCategory={this.props.treatmentCategory} />
+					)
+					: null
+				}
+				{
+					this.state.treatment?
+						<FormConfirmed treatment={this.state.treatment} canceledChoice={this.canceledChoice} />
+					:
+						<React.Fragment>
+							{this.props.match.path=='/doctor' ?  null : 
+								<h2>
+									LES TRAITMENTS DISPONIBLES<br/>
+									<small>"Vous pouvez choisir le traitement parmi ses listes"</small>
+								</h2>}
+							<h2>{this.props.treatmentCategory.nameEn}:</h2>
+							<div className="card-columns text-center">
+								{
+									this.props.treatmentCategory.treatments.map(treatment => (
+										<div className="card pointer text-left" key={treatment.id} onClick={ this.state.path === '/doctor' ? null :
+										e => this.canceledChoice(treatment)}>
+											<Treatment treatment={treatment} />
+										</div>
+									))
+								}
+							</div>
+							<button className="btn pointer" onClick={this.props.selectTreatmentCategory.bind(this,null)}>
+								Back
+							</button>
+						</React.Fragment>
 				}
 
 			</div>

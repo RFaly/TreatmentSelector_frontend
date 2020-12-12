@@ -20,23 +20,23 @@ class App extends React.Component {
 	render(){
 		return(
 			<BrowserRouter>
-				<nav >
+				<nav>
 					<SideBar selectTreatmentCategory={this.selectTreatmentCategory} />
 				</nav>
 				<div id="main-div" className="d-flex flex-wrap justify-content-center align-items-center" >
 					<Switch>
 						<Route path="/patient">
-							{
+							{ (props) => 
 								this.state.selectedTreatmentCategory ?
-								<ListTreatment pathName="/patient" treatmentCategory={this.state.selectedTreatmentCategory} selectTreatmentCategory={this.selectTreatmentCategory} />:
-								<ListTreatmentCategory selectTreatmentCategory={this.selectTreatmentCategory} />
+								<ListTreatment {...props} pathName="/patient" treatmentCategory={this.state.selectedTreatmentCategory} selectTreatmentCategory={this.selectTreatmentCategory} /> :
+								<ListTreatmentCategory {...props} selectTreatmentCategory={this.selectTreatmentCategory} />
 							}
 						</Route>
 						<Route path="/doctor">
-							{
+							{	(props) => 
 								this.state.selectedTreatmentCategory ?
-								<ListTreatment pathName="/doctor" treatmentCategory={this.state.selectedTreatmentCategory} selectTreatmentCategory={this.selectTreatmentCategory} />:
-								<ListTreatmentCategory selectTreatmentCategory={this.selectTreatmentCategory} />
+								<ListTreatment {...props} pathName="/doctor" treatmentCategory={this.state.selectedTreatmentCategory} selectTreatmentCategory={this.selectTreatmentCategory} /> :
+								<ListTreatmentCategory {...props} selectTreatmentCategory={this.selectTreatmentCategory} />
 							}
 						</Route>
 						<Route path="/" component={HomePage} />
@@ -48,3 +48,23 @@ class App extends React.Component {
 }
 
 export default App
+
+/*
+constructor(props){
+	super(props)
+	this.state = {
+		name: "Damien"
+	}
+	this.changeState = this.changeState.bind(this)
+}
+
+
+// Affichage
+{this.state.name}
+
+changeState(e){
+	this.setState({
+		name : e.target.value
+	})
+}
+*/

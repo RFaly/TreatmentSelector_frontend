@@ -1,10 +1,10 @@
 import React from 'react';
+import { FaAngleRight } from 'react-icons/fa';
+
 
 const Treatment = ({treatment}) => {
 	return(
-		<div>
-			<div>{treatment.nameEn}</div>
-		</div>
+		<span><FaAngleRight className="rose" /> {treatment.nameEn}</span>
 	)
 }
 
