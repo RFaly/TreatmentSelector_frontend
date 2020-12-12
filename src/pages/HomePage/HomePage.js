@@ -5,6 +5,7 @@ class HomePage extends React.Component {
 	render(){
 		return(
 			<div>
+
 				<img src="https://mtomady.mg/wp-content/uploads/2018/05/logo-mtomady-madagascar.png" alt="" width="90%"/>
 				
 				<center>
