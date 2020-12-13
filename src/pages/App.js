@@ -3,14 +3,13 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
 import HomePage from './HomePage/HomePage';
 import SideBar from './SideBar/SideBar';
-import Dashboard from './Dashboard/Dashboard';
 
 import ListTreatmentCategory from './Patient/ListTreatmentCategory';
 import ListTreatment from './Patient/ListTreatment';
 
 class App extends React.Component {
 	state = {
-		selectedTreatmentCategory: null
+		selectedTreatmentCategory: null,
 	}
 
 	selectTreatmentCategory = (treatmentCategory) => {

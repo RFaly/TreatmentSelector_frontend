@@ -1,65 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Treatment from './Components/Treatment'
 import FormConfirmed from './Components/FormConfirmed'
 import CreateTreatment from '../Dashboard/CreateTreatment'
 
-class ListTreatment extends React.Component {
-	state = {
-		treatment: null,
-		path: window.location.pathname,
-		addTC: false,
+import { useQuery } from '@apollo/client';
+import { TREATMENTS } from '../../services/queries/TreatmentCategoriesQueries'
+
+function ListTreatment (props) {
+
+	let path = props.match.path
+	const [treatment, setTreatment] = useState(null);
+
+	let canceledChoice = (value) => {
+		setTreatment(value)
 	}
 
-	addTreatment = () => {
-		this.setState(prevState => ({addTC: !prevState.addTC}))
-	}
+	const {loading, error, data} = useQuery(TREATMENTS, { 
+		variables: { treatmentCategory: parseInt(props.treatmentCategory.id) },
+	});
 
-	canceledChoice = (value) => {
-		this.setState({treatment: value})
-	}
+	if (loading) return 'Loading ...';
 
+	if (error) return `Error ${error.message}`;
 
-	render(){
-		return(
-			<div className="text-center">
-				{
-					this.props.match.path=='/doctor' ? (
-						<CreateTreatment treatmentCategory={this.props.treatmentCategory} />
-					)
-					: null
-				}
-				{
-					this.state.treatment?
-						<FormConfirmed treatment={this.state.treatment} canceledChoice={this.canceledChoice} />
-					:
-						<React.Fragment>
-							{this.props.match.path=='/doctor' ?  null : 
-								<h2>
-									LES TRAITMENTS DISPONIBLES<br/>
-									<small>"Vous pouvez choisir le traitement parmi ses listes"</small>
-								</h2>}
-							<h2>{this.props.treatmentCategory.nameEn}:</h2>
-							<div className="card-columns text-center">
+	return(
+		<div className="text-center">
+			{
+				path==='/doctor' ? (
+					<CreateTreatment treatmentCategory={props.treatmentCategory} />
+				)
+				: null
+			}
+			{
+				treatment?
+					<FormConfirmed treatment={treatment} canceledChoice={canceledChoice} />
+				:
+					<React.Fragment>
+						{ path==='/doctor' ?  null : 
+							<h2>
+								LES TRAITMENTS DISPONIBLES<br/>
+								<small>"Vous pouvez choisir le traitement parmi ses listes"</small>
+							</h2>
+						}
+
+						<h2>{ props.treatmentCategory.nameEn }:</h2>
+						
+							{
+								(data.treatments.length === 0) ? 
+									<p>Aucun traitement dans cette liste</p>
+								:
+
+								<div className="card-columns text-center">
 								{
-									this.props.treatmentCategory.treatments.map(treatment => (
-										<div className="card pointer text-left" key={treatment.id} onClick={ this.state.path === '/doctor' ? null :
-										e => this.canceledChoice(treatment)}>
+									data.treatments.map(treatment => (
+										<div className="card pointer text-left" key={treatment.id} onClick={ path === '/doctor' ? null :
+										e => canceledChoice(treatment)}>
 											<Treatment treatment={treatment} />
 										</div>
 									))
 								}
-							</div>
-							<button className="btn pointer" onClick={this.props.selectTreatmentCategory.bind(this,null)}>
-								Back
-							</button>
-						</React.Fragment>
-				}
-
-			</div>
-		)
-	}
-
+								</div>
+							}
+						<button className="btn pointer" onClick={props.selectTreatmentCategory.bind(this,null)}>
+							Back
+						</button>
+					</React.Fragment>
+			}
+		</div>
+	)
 }
 
 export default ListTreatment

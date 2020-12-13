@@ -1,26 +1,66 @@
 import React, { useState } from 'react';
+import { FaPlusSquare } from 'react-icons/fa'
 import $ from 'jquery';
 import { useMutation } from '@apollo/client';
-import { CREATE_TREATMENT_CATEGORY, UPDATE_TREATMENT_CATEGORY } from '../../services/mutations/MutationsTreatmentCategory';
-import { FaPlusSquare } from 'react-icons/fa'
 
-function CreateTreatmentCategory({treatmentCategory}) {
-	const [ createTreatmentCategory, { data: mutationsData, loading: mutationLoading, error: mutationError }] = useMutation(CREATE_TREATMENT_CATEGORY);
+import { CREATE_TREATMENT_CATEGORY } from '../../services/mutations/MutationsTreatmentCategory';
+// UPDATE_TREATMENT_CATEGORY
+
+// import TreatmentCategory from '../Patient/Components/TreatmentCategory';
+
+function CreateTreatmentCategory(props) {
+	const [ createTreatmentCategory, { onCompleted, data , loading: mutationLoading, error: mutationError }] = useMutation(CREATE_TREATMENT_CATEGORY);
 
 	const [nameEn,setNameEn] = useState('')
 	const [nameFr,setNameFr] = useState('')
 	const [nameMg,setNameMg] = useState('')
-	const [showModal,setShowModal] = useState(false)
+	let saveData = false
+
 	// const [treatmentCategoryId,setTreatmentCategoryId] = useState(treatmentCategory.id)
 
 	let submitTreatmentCategory = (e) => {
 		e.preventDefault();
 		createTreatmentCategory({ variables: { nameEn: nameEn, nameFr: nameFr, nameMg: nameMg }});
-		window.$('#exampleModalCenter').modal('hide');
+
+		$("#nameEn").val('');
+		$("#nameFr").val('');
+		$("#nameMg").val('');
+
+		let treatmentCategory = {}
+
+		if (saveData) {
+			
+			// treatmentCategory = mutationsData.createTreatmentCategory.treatmentCategory
+			// console.log(treatmentCategory)
+
+			// props.addNewTreatmentCategory(treatmentCategory)
+		}
 	}
+
+	// if (mutationsData) {
+	// 	console.log(mutationsData.createTreatmentCategory.treatmentCategory)
+	// 	console.log("Vita mitsy")
+	// }
+	// {window.$('#exampleModalCenter').modal('hide')}
+
 
 	return(
 		<div>
+
+			
+			{
+				mutationLoading && 
+				<div className="alert alert-primary" role="alert">
+				  Loading...
+				</div>
+			}
+
+			{
+				mutationError && 
+				<div className="alert alert-danger" role="alert">
+				  Error: ( Please try again)
+				</div>
+			}
 
 			<h2>Ajouter un nouveau categorie de traitement</h2>
 			<FaPlusSquare type="button" className="add-btn-css" data-toggle="modal" data-target="#exampleModalCenter" />
@@ -49,14 +89,6 @@ function CreateTreatmentCategory({treatmentCategory}) {
 								<input type="text" id="nameMg" className="form-control" name="nameMg" defaultValue={nameMg} onChange={(e)=>{setNameMg(e.target.value)}}/>
 							</div>
 							{mutationLoading && <p>Loading...</p>}
-							{mutationError && <p>Error: ( Please try again)</p>}
-							{
-								mutationsData && 
-								<p>
-									{console.log(mutationsData)}
-									Donné sauvegardé
-								</p>
-							}
 						</div>
 						<div className="modal-footer">
 							<button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

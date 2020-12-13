@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaClinicMedical, FaUserInjured, FaUserMd, FaListAlt, FaCheckSquare, FaPlusSquare, FaTrash} from 'react-icons/fa';
+import { FaClinicMedical, FaUserInjured, FaUserMd } from 'react-icons/fa';
+// FaListAlt, FaCheckSquare, FaPlusSquare, FaTrash
 import './SideBar.css';
 
 const SideBar = ({selectTreatmentCategory}) => (

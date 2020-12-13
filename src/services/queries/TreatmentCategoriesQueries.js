@@ -7,18 +7,20 @@ const TREATMENT_CATEGORIES = gql`
 	    nameEn,
 	    nameFr,
 	    nameMg,
-	    countTreatments,
-	    treatments {
-	      id,
-	      nameEn,
-	      nameFr,
-	      nameMg,
-	      treatmentCategory{
-	      	id
-	      }
-	    }
+	    countTreatments
 	  }
 	}
 `;
 
-export { TREATMENT_CATEGORIES }
+const TREATMENTS = gql`
+	query Treatments($treatmentCategory: ID!) {
+	    treatments(treatmentCategory: $treatmentCategory) {
+	      	id,
+		    nameEn,
+		    nameFr,
+		    nameMg
+	    }
+	}
+`;
+
+export { TREATMENT_CATEGORIES, TREATMENTS }
