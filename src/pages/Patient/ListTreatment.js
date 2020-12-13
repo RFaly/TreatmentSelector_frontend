@@ -13,35 +13,35 @@ import { DESTROY_TREATMENT } from '../../services/mutations/MutationsTreatment';
 
 import { FaTrash,FaEdit } from 'react-icons/fa';
 
-
 function ListTreatment (props) {
+	const [treatment, setTreatment] = useState(null);
+	let path = props.match.path
 
-	const deleteElementInNode = (e) => {
-		$(e.target).parent().closest('div').remove()
-	};
+	let canceledChoice = (value) => {
+		setTreatment(value)
+	}
 
 	const [ destroyTreatment] = useMutation( DESTROY_TREATMENT );
 
 	let toDestroyTreatment = (e,treatmentId) => {
-		destroyTreatment(
-			{ 
-				variables: { treatmentId: parseInt(treatmentId)},
-				onCompleted: deleteElementInNode(e)
+		e.preventDefault();
+		e.stopPropagation();
+		destroyTreatment({ 
+			variables: { treatmentId: parseInt(treatmentId)},
+			optimisticResponse: true,
+		    update: (cache) => {
+				const existingTreatments = cache.readQuery({ 
+					query: TREATMENTS, 
+					variables: { treatmentCategory: parseInt(props.treatmentCategory.id) }
+				});
+				const newTreatments = existingTreatments.treatments.filter(t => (t.id !== treatmentId));
+				cache.writeQuery({
+					query: TREATMENTS, 
+					variables: { treatmentCategory: parseInt(props.treatmentCategory.id) },
+					data: {treatments: newTreatments}
+				});
 			}
-		);
-	}
-
-	const [newTreatments,setNewTreatment] = useState([])
-	let path = props.match.path
-	const [treatment, setTreatment] = useState(null);
-
-	let addNewTreatment = (treatment) => {
-		let arrayT = [...newTreatments,treatment]
-		setNewTreatment(arrayT)
-	}
-
-	let canceledChoice = (value) => {
-		setTreatment(value)
+		});
 	}
 
 	const {loading, error, data} = useQuery(TREATMENTS, { 
@@ -56,7 +56,7 @@ function ListTreatment (props) {
 		<div className="text-center">
 			{
 				path==='/doctor' ? (
-					<CreateTreatment addNewTreatment={addNewTreatment} treatmentCategory={props.treatmentCategory} />
+					<CreateTreatment treatmentCategory={props.treatmentCategory} />
 				)
 				: null
 			}
@@ -75,10 +75,9 @@ function ListTreatment (props) {
 						<h2>{ props.treatmentCategory.nameEn }:</h2>
 						
 							{
-								(data.treatments.length === 0 && newTreatments.length===0) ? 
+								data.treatments.length === 0 ? 
 									<p>Aucun traitement dans cette liste</p>
 								:
-
 								<div className="card-columns text-center">
 									{
 										data.treatments.map(treatment => (
@@ -92,22 +91,9 @@ function ListTreatment (props) {
 											</div>
 										))
 									}
-									{
-										newTreatments.length===0 ? null 
-											:
-										newTreatments.map(treatment => (
-											<div className="card pointer text-left" key={treatment.id}>
-												<FaTrash onClick={e => toDestroyTreatment(e,treatment.id)}/>
-												<FaEdit/>
-												<div onClick={ path === '/doctor' ? null :
-												e => canceledChoice(treatment)}>
-													<Treatment treatment={treatment} />
-												</div>
-											</div>
-										))
-									}
 								</div>
 							}
+
 						<button className="btn pointer" onClick={props.selectTreatmentCategory.bind(this,null)}>
 							Back
 						</button>

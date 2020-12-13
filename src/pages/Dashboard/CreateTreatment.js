@@ -5,11 +5,13 @@ import $ from 'jquery';
 
 import { CREATE_TREATMENT } from '../../services/mutations/MutationsTreatment';
 //UPDATE_TREATMENT
+import { TREATMENTS } from '../../services/queries/TreatmentCategoriesQueries';
 
-function CreateTreatment({treatmentCategory,addNewTreatment}) {
+function CreateTreatment({treatmentCategory}) {
 	const [nameEn,setNameEn] = useState('')
 	const [nameFr,setNameFr] = useState('')
 	const [nameMg,setNameMg] = useState('')
+
 	// const [treatmentCategoryId,setTreatmentCategoryId] = useState(treatmentCategory.id)
 
 	const resetInput = () => {
@@ -20,7 +22,20 @@ function CreateTreatment({treatmentCategory,addNewTreatment}) {
 	};
 
 	const updateCache = (cache, {data}) => {
-		addNewTreatment(data.createTreatment.treatment)
+		const existingTreatments = cache.readQuery({
+		  	query: TREATMENTS, variables: { 
+	  			treatmentCategory: parseInt(treatmentCategory.id) 
+	  		}
+		});
+
+		const newTreatment = data.createTreatment.treatment;
+
+		cache.writeQuery({
+			query: TREATMENTS, variables: { 
+				treatmentCategory: parseInt(treatmentCategory.id) 
+			},
+		  	data: {treatments: [newTreatment, ...existingTreatments.treatments]}
+		});
 	}
 
 	const [ createTreatment, { data: mutationsData, loading: mutationLoading, error: mutationError }] = useMutation(CREATE_TREATMENT,

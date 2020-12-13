@@ -1,41 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/client';
 import { useMutation } from '@apollo/client';
-import $ from 'jquery';
-import { FaTrash,FaEdit } from 'react-icons/fa';
+
+import { FaTrash,FaEdit,FaPlusSquare } from 'react-icons/fa';
 
 import { TREATMENT_CATEGORIES } from '../../services/queries/TreatmentCategoriesQueries';
 import { DESTROY_TREATMENT_CATEGORY } from '../../services/mutations/MutationsTreatmentCategory';
-
 
 import TreatmentCategory from './Components/TreatmentCategory';
 import CreateTreatmentCategory from '../Dashboard/CreateTreatmentCategory'
 
 function ListTreatmentCategory(props){
-
-	const deleteElementInNode = (e) => {
-		$(e.target).parent().closest('div').remove()
-	};
+	const {loading, error, data} = useQuery(TREATMENT_CATEGORIES);
 
 	const [ destroyTreatmentCategory] = useMutation(DESTROY_TREATMENT_CATEGORY);
 
 	let toDestroyTreatmentCategory = (e,treatmentCategoryId) => {
-		destroyTreatmentCategory(
-			{ 
-				variables: { treatmentCategoryId: parseInt(treatmentCategoryId)},
-				onCompleted: deleteElementInNode(e)
+		e.preventDefault();
+    	e.stopPropagation();
+
+		destroyTreatmentCategory({ 
+			variables: { treatmentCategoryId: parseInt(treatmentCategoryId)},
+			optimisticResponse: true,
+		    update: (cache) => {
+				const existingTreatmentCategories = cache.readQuery({ query: TREATMENT_CATEGORIES });
+				const newTreatmentCategories = existingTreatmentCategories.treatmentCategories.filter(t => (t.id !== treatmentCategoryId));
+				cache.writeQuery({
+					query: TREATMENT_CATEGORIES,
+					data: {treatmentCategories: newTreatmentCategories}
+				});
 			}
-		);
+		});
 	}
-
-	const [newTreatmentCategories,setNewTreatmentCategories] = useState([])
-
-	let addNewTreatmentCategory = (treatmentCategory) => {
-		let arrayTC = [...newTreatmentCategories,treatmentCategory]
-		setNewTreatmentCategories(arrayTC)
-	}
-
-	const {loading, error, data} = useQuery(TREATMENT_CATEGORIES);
 
 	if (loading) return 'Loading ...';
 	if (error) return `Error ${error.message}`;
@@ -45,7 +41,9 @@ function ListTreatmentCategory(props){
 			{
 				props.match.path==='/doctor' ?
 					<div>
-						<CreateTreatmentCategory selectTreatmentCategory={props.selectTreatmentCategory} addNewTreatmentCategory={addNewTreatmentCategory} />
+						<h2>Ajouter un nouveau categorie de traitement</h2>
+						<FaPlusSquare type="button" className="add-btn-css" data-toggle="modal" data-target="#exampleModalCenter" />
+						<CreateTreatmentCategory selectTreatmentCategory={props.selectTreatmentCategory} />
 					</div>
 					:
 					<React.Fragment>
@@ -55,32 +53,31 @@ function ListTreatmentCategory(props){
 						</h2>
 					</React.Fragment>
 			}
-			<div className="card-columns text-center" id="listTC-container">
-				{
-					data.treatmentCategories.map(treatmentCategory => (
-						<div className="card pointer text-left" key={treatmentCategory.id}>
-							<FaTrash onClick={e => toDestroyTreatmentCategory(e,treatmentCategory.id)}/>
-							<FaEdit/>
-							<div onClick={props.selectTreatmentCategory.bind(this,treatmentCategory)} >
-								<TreatmentCategory treatmentCategory={treatmentCategory} />
+
+			{
+				data.treatmentCategories.length === 0 ? 
+					<p>Aucun traitement dans cette liste</p>
+				:
+				<div className="card-columns text-center" id="listTC-container">
+					{
+						data.treatmentCategories.map(treatmentCategory => (
+							<div className="card pointer text-left" key={treatmentCategory.id}>
+								{
+									props.match.path==='/doctor' ? 
+										<React.Fragment>
+											<FaTrash onClick={e => toDestroyTreatmentCategory(e,treatmentCategory.id)}/>
+											<FaEdit/>
+										</React.Fragment>
+									: null
+								}
+								<div onClick={props.selectTreatmentCategory.bind(this,treatmentCategory)} >
+									<TreatmentCategory treatmentCategory={treatmentCategory} />
+								</div>
 							</div>
-						</div>
-					))
-				}
-				{
-					newTreatmentCategories.length===0 ? null 
-						:
-					newTreatmentCategories.map(treatmentCategory => (
-						<div className="card pointer text-left" key={treatmentCategory.id}>
-							<FaTrash onClick={e => toDestroyTreatmentCategory(e,treatmentCategory.id)}/>
-							<FaEdit/>
-							<div onClick={props.selectTreatmentCategory.bind(this,treatmentCategory)} >
-								<TreatmentCategory treatmentCategory={treatmentCategory} />
-							</div>
-						</div>
-					))
-				}
-			</div>
+						))
+					}
+				</div>
+			}
 		</div>
 	)
 }

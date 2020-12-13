@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { FaPlusSquare } from 'react-icons/fa'
 import $ from 'jquery';
 import { useMutation } from '@apollo/client';
 
 import { CREATE_TREATMENT_CATEGORY } from '../../services/mutations/MutationsTreatmentCategory';
 // UPDATE_TREATMENT_CATEGORY
-
-// import TreatmentCategory from '../Patient/Components/TreatmentCategory';
+import { TREATMENT_CATEGORIES } from '../../services/queries/TreatmentCategoriesQueries';
 
 function CreateTreatmentCategory(props) {
 
@@ -22,8 +20,16 @@ function CreateTreatmentCategory(props) {
 	};
 
 	const updateCache = (cache, {data}) => {
-		props.addNewTreatmentCategory(data.createTreatmentCategory.treatmentCategory)
+		const existingTreatmentCategories = cache.readQuery({
+		  query: TREATMENT_CATEGORIES
+		});
+		const newTreatmentCategory = data.createTreatmentCategory.treatmentCategory;
+		cache.writeQuery({
+		  query: TREATMENT_CATEGORIES,
+		  data: {treatmentCategories: [newTreatmentCategory, ...existingTreatmentCategories.treatmentCategories]}
+		});
 	}
+
 	// const [treatmentCategoryId,setTreatmentCategoryId] = useState(treatmentCategory.id)
 
 	const [ createTreatmentCategory, { loading: mutationLoading, error: mutationError }] = useMutation(CREATE_TREATMENT_CATEGORY,
@@ -52,10 +58,6 @@ function CreateTreatmentCategory(props) {
 				  Error: ( Please try again)
 				</div>
 			}
-
-			<h2>Ajouter un nouveau categorie de traitement</h2>
-			<FaPlusSquare type="button" className="add-btn-css" data-toggle="modal" data-target="#exampleModalCenter" />
-
 	        <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			  <div className="modal-dialog modal-dialog-centered" role="document">
 			    <div className="modal-content">
