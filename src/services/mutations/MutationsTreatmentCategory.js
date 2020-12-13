@@ -38,7 +38,7 @@ const UPDATE_TREATMENT_CATEGORY = gql`
 `;
 
 const DESTROY_TREATMENT_CATEGORY = gql`
-	mutation destroyTreatmentCategory($treatmentCategoryId: int!){
+	mutation destroyTreatmentCategory($treatmentCategoryId: ID!){
 		destroyTreatmentCategory(input:{
 			treatmentCategoryId: $treatmentCategoryId
 		}){

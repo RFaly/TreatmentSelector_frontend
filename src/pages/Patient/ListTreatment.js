@@ -1,13 +1,35 @@
 import React, { useState } from 'react';
 
+import { useMutation } from '@apollo/client';
+import $ from 'jquery';
+
 import Treatment from './Components/Treatment'
 import FormConfirmed from './Components/FormConfirmed'
 import CreateTreatment from '../Dashboard/CreateTreatment'
 
 import { useQuery } from '@apollo/client';
 import { TREATMENTS } from '../../services/queries/TreatmentCategoriesQueries'
+import { DESTROY_TREATMENT } from '../../services/mutations/MutationsTreatment';
+
+import { FaTrash,FaEdit } from 'react-icons/fa';
+
 
 function ListTreatment (props) {
+
+	const deleteElementInNode = (e) => {
+		$(e.target).parent().closest('div').remove()
+	};
+
+	const [ destroyTreatment] = useMutation( DESTROY_TREATMENT );
+
+	let toDestroyTreatment = (e,treatmentId) => {
+		destroyTreatment(
+			{ 
+				variables: { treatmentId: parseInt(treatmentId)},
+				onCompleted: deleteElementInNode(e)
+			}
+		);
+	}
 
 	const [newTreatments,setNewTreatment] = useState([])
 	let path = props.match.path
@@ -16,7 +38,6 @@ function ListTreatment (props) {
 	let addNewTreatment = (treatment) => {
 		let arrayT = [...newTreatments,treatment]
 		setNewTreatment(arrayT)
-		console.log(newTreatments)
 	}
 
 	let canceledChoice = (value) => {
@@ -61,9 +82,13 @@ function ListTreatment (props) {
 								<div className="card-columns text-center">
 									{
 										data.treatments.map(treatment => (
-											<div className="card pointer text-left" key={treatment.id} onClick={ path === '/doctor' ? null :
-											e => canceledChoice(treatment)}>
-												<Treatment treatment={treatment} />
+											<div className="card pointer text-left" key={treatment.id}>
+												<FaTrash onClick={e => toDestroyTreatment(e,treatment.id)}/>
+												<FaEdit/>
+												<div onClick={ path === '/doctor' ? null :
+												e => canceledChoice(treatment)}>
+													<Treatment treatment={treatment} />
+												</div>
 											</div>
 										))
 									}
@@ -71,9 +96,13 @@ function ListTreatment (props) {
 										newTreatments.length===0 ? null 
 											:
 										newTreatments.map(treatment => (
-											<div className="card pointer text-left" key={treatment.id} onClick={ path === '/doctor' ? null :
-											e => canceledChoice(treatment)}>
-												<Treatment treatment={treatment} />
+											<div className="card pointer text-left" key={treatment.id}>
+												<FaTrash onClick={e => toDestroyTreatment(e,treatment.id)}/>
+												<FaEdit/>
+												<div onClick={ path === '/doctor' ? null :
+												e => canceledChoice(treatment)}>
+													<Treatment treatment={treatment} />
+												</div>
 											</div>
 										))
 									}

@@ -23,7 +23,6 @@ function CreateTreatmentCategory(props) {
 
 	const updateCache = (cache, {data}) => {
 		props.addNewTreatmentCategory(data.createTreatmentCategory.treatmentCategory)
-		console.log(data)
 	}
 	// const [treatmentCategoryId,setTreatmentCategoryId] = useState(treatmentCategory.id)
 
@@ -40,8 +39,6 @@ function CreateTreatmentCategory(props) {
 
 	return(
 		<div>
-
-			
 			{
 				mutationLoading && 
 				<div className="alert alert-primary" role="alert">
@@ -63,7 +60,7 @@ function CreateTreatmentCategory(props) {
 			  <div className="modal-dialog modal-dialog-centered" role="document">
 			    <div className="modal-content">
 			      <div className="modal-header">
-			        <h5 className="modal-title" id="exampleModalCenterTitle">Entrer le nom du traitement</h5>
+			        <h5 className="modal-title" id="exampleModalCenterTitle">Entrer le nom de la categorie du traitement</h5>
 			        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
