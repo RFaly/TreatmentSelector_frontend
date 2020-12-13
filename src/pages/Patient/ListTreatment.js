@@ -9,8 +9,15 @@ import { TREATMENTS } from '../../services/queries/TreatmentCategoriesQueries'
 
 function ListTreatment (props) {
 
+	const [newTreatments,setNewTreatment] = useState([])
 	let path = props.match.path
 	const [treatment, setTreatment] = useState(null);
+
+	let addNewTreatment = (treatment) => {
+		let arrayT = [...newTreatments,treatment]
+		setNewTreatment(arrayT)
+		console.log(newTreatments)
+	}
 
 	let canceledChoice = (value) => {
 		setTreatment(value)
@@ -28,7 +35,7 @@ function ListTreatment (props) {
 		<div className="text-center">
 			{
 				path==='/doctor' ? (
-					<CreateTreatment treatmentCategory={props.treatmentCategory} />
+					<CreateTreatment addNewTreatment={addNewTreatment} treatmentCategory={props.treatmentCategory} />
 				)
 				: null
 			}
@@ -47,19 +54,29 @@ function ListTreatment (props) {
 						<h2>{ props.treatmentCategory.nameEn }:</h2>
 						
 							{
-								(data.treatments.length === 0) ? 
+								(data.treatments.length === 0 && newTreatments.length===0) ? 
 									<p>Aucun traitement dans cette liste</p>
 								:
 
 								<div className="card-columns text-center">
-								{
-									data.treatments.map(treatment => (
-										<div className="card pointer text-left" key={treatment.id} onClick={ path === '/doctor' ? null :
-										e => canceledChoice(treatment)}>
-											<Treatment treatment={treatment} />
-										</div>
-									))
-								}
+									{
+										data.treatments.map(treatment => (
+											<div className="card pointer text-left" key={treatment.id} onClick={ path === '/doctor' ? null :
+											e => canceledChoice(treatment)}>
+												<Treatment treatment={treatment} />
+											</div>
+										))
+									}
+									{
+										newTreatments.length===0 ? null 
+											:
+										newTreatments.map(treatment => (
+											<div className="card pointer text-left" key={treatment.id} onClick={ path === '/doctor' ? null :
+											e => canceledChoice(treatment)}>
+												<Treatment treatment={treatment} />
+											</div>
+										))
+									}
 								</div>
 							}
 						<button className="btn pointer" onClick={props.selectTreatmentCategory.bind(this,null)}>

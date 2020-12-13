@@ -9,40 +9,34 @@ import { CREATE_TREATMENT_CATEGORY } from '../../services/mutations/MutationsTre
 // import TreatmentCategory from '../Patient/Components/TreatmentCategory';
 
 function CreateTreatmentCategory(props) {
-	const [ createTreatmentCategory, { onCompleted, data , loading: mutationLoading, error: mutationError }] = useMutation(CREATE_TREATMENT_CATEGORY);
 
 	const [nameEn,setNameEn] = useState('')
 	const [nameFr,setNameFr] = useState('')
 	const [nameMg,setNameMg] = useState('')
-	let saveData = false
 
-	// const [treatmentCategoryId,setTreatmentCategoryId] = useState(treatmentCategory.id)
-
-	let submitTreatmentCategory = (e) => {
-		e.preventDefault();
-		createTreatmentCategory({ variables: { nameEn: nameEn, nameFr: nameFr, nameMg: nameMg }});
-
+	const resetInput = () => {
 		$("#nameEn").val('');
 		$("#nameFr").val('');
 		$("#nameMg").val('');
+	    window.$('#exampleModalCenter').modal('hide');
+	};
 
-		let treatmentCategory = {}
-
-		if (saveData) {
-			
-			// treatmentCategory = mutationsData.createTreatmentCategory.treatmentCategory
-			// console.log(treatmentCategory)
-
-			// props.addNewTreatmentCategory(treatmentCategory)
-		}
+	const updateCache = (cache, {data}) => {
+		props.addNewTreatmentCategory(data.createTreatmentCategory.treatmentCategory)
+		console.log(data)
 	}
+	// const [treatmentCategoryId,setTreatmentCategoryId] = useState(treatmentCategory.id)
 
-	// if (mutationsData) {
-	// 	console.log(mutationsData.createTreatmentCategory.treatmentCategory)
-	// 	console.log("Vita mitsy")
-	// }
-	// {window.$('#exampleModalCenter').modal('hide')}
+	const [ createTreatmentCategory, { loading: mutationLoading, error: mutationError }] = useMutation(CREATE_TREATMENT_CATEGORY,
+		{onCompleted : resetInput, update: updateCache}
+	);
 
+	let submitTreatmentCategory = (e) => {
+		e.preventDefault();
+		createTreatmentCategory(
+			{ variables: { nameEn: nameEn, nameFr: nameFr, nameMg: nameMg }}
+		);
+	}
 
 	return(
 		<div>

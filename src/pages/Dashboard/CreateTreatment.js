@@ -1,22 +1,36 @@
 import React, { useState } from 'react';
 import { FaPlusSquare } from 'react-icons/fa'
 import { useMutation } from '@apollo/client';
+import $ from 'jquery';
 
 import { CREATE_TREATMENT } from '../../services/mutations/MutationsTreatment';
 //UPDATE_TREATMENT
 
-function CreateTreatment({treatmentCategory}) {
-	const [ createTreatment, { data: mutationsData, loading: mutationLoading, error: mutationError }] = useMutation(CREATE_TREATMENT);
-
+function CreateTreatment({treatmentCategory,addNewTreatment}) {
 	const [nameEn,setNameEn] = useState('')
 	const [nameFr,setNameFr] = useState('')
 	const [nameMg,setNameMg] = useState('')
 	// const [treatmentCategoryId,setTreatmentCategoryId] = useState(treatmentCategory.id)
 
+	const resetInput = () => {
+		$("#nameEn").val('');
+		$("#nameFr").val('');
+		$("#nameMg").val('');
+	    window.$('#exampleModalCenter').modal('hide');
+	};
+
+	const updateCache = (cache, {data}) => {
+		addNewTreatment(data.createTreatment.treatment)
+	}
+
+	const [ createTreatment, { data: mutationsData, loading: mutationLoading, error: mutationError }] = useMutation(CREATE_TREATMENT,
+		{onCompleted : resetInput, update: updateCache}
+	);
+
+
 	let submitTreatment = (e) => {
 		e.preventDefault();
 		createTreatment({ variables: { nameEn: nameEn, nameFr: nameFr, nameMg: nameMg, treatmentCategoryId: parseInt(treatmentCategory.id) }});
-		window.$('#exampleModalCenter').modal('hide');
 	}
 
 	return(
@@ -53,7 +67,6 @@ function CreateTreatment({treatmentCategory}) {
 							{
 								mutationsData && 
 								<p>
-									{console.log(mutationsData)}
 									Donné sauvegardé
 								</p>
 							}

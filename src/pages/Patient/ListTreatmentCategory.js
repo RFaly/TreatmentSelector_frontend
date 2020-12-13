@@ -7,20 +7,17 @@ import CreateTreatmentCategory from '../Dashboard/CreateTreatmentCategory'
 
 function ListTreatmentCategory(props){
 
-	const [newTreatmentCategories,setNewTreatmentCategories] = useState(null)
+	const [newTreatmentCategories,setNewTreatmentCategories] = useState([])
 
 	let addNewTreatmentCategory = (treatmentCategory) => {
-		setNewTreatmentCategories(treatmentCategory)
+		let arrayTC = [...newTreatmentCategories,treatmentCategory]
+		setNewTreatmentCategories(arrayTC)
 	}
 
 	const {loading, error, data} = useQuery(TREATMENT_CATEGORIES);
 
 	if (loading) return 'Loading ...';
 	if (error) return `Error ${error.message}`;
-
-	if (data) {
-		console.log(data)
-	}
 
 	return(
 		<div className="text-center container">
@@ -46,9 +43,13 @@ function ListTreatmentCategory(props){
 					))
 				}
 				{
-					newTreatmentCategories ? 
-					<h1>Bonjour BDBDBD {newTreatmentCategories.id} </h1>
-					: <h1>Bonjour {newTreatmentCategories} </h1>
+					newTreatmentCategories.length===0 ? null 
+						:
+					newTreatmentCategories.map(treatmentCategory => (
+						<div className="card pointer text-left" key={treatmentCategory.id} onClick={props.selectTreatmentCategory.bind(this,treatmentCategory)} >
+							<TreatmentCategory treatmentCategory={treatmentCategory} />
+						</div>
+					))
 				}
 			</div>
 		</div>
