@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-
+import { useQuery } from '@apollo/client';
 import { useMutation } from '@apollo/client';
-import $ from 'jquery';
+import { FaTrash,FaEdit } from 'react-icons/fa';
 
 import Treatment from './Components/Treatment'
 import FormConfirmed from './Components/FormConfirmed'
 import CreateTreatment from '../Dashboard/CreateTreatment'
 
-import { useQuery } from '@apollo/client';
 import { TREATMENTS } from '../../services/queries/TreatmentCategoriesQueries'
 import { DESTROY_TREATMENT } from '../../services/mutations/MutationsTreatment';
 
-import { FaTrash,FaEdit } from 'react-icons/fa';
 
 function ListTreatment (props) {
 	const [treatment, setTreatment] = useState(null);

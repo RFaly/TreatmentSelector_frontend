@@ -42,8 +42,8 @@ function ListTreatmentCategory(props){
 				props.match.path==='/doctor' ?
 					<div>
 						<h2>Ajouter un nouveau categorie de traitement</h2>
-						<FaPlusSquare type="button" className="add-btn-css" data-toggle="modal" data-target="#exampleModalCenter" />
-						<CreateTreatmentCategory selectTreatmentCategory={props.selectTreatmentCategory} />
+						<FaPlusSquare type="button" className="add-btn-css" data-toggle="modal" data-target="#exampleModalCenter0" />
+						<CreateTreatmentCategory treatmentCategory={0} />
 					</div>
 					:
 					<React.Fragment>
@@ -66,7 +66,8 @@ function ListTreatmentCategory(props){
 									props.match.path==='/doctor' ? 
 										<React.Fragment>
 											<FaTrash onClick={e => toDestroyTreatmentCategory(e,treatmentCategory.id)}/>
-											<FaEdit/>
+											<FaEdit data-toggle="modal" data-target={`#exampleModalCenter${treatmentCategory.id}`} />
+											<CreateTreatmentCategory treatmentCategory={treatmentCategory} />
 										</React.Fragment>
 									: null
 								}

@@ -10,8 +10,8 @@ const CREATE_TREATMENT_CATEGORY = gql`
 			treatmentCategory {
 				id,
 				nameEn,
-				nameMg,
-				nameFr
+				nameFr,
+				nameMg
 			}
 			errors
 		}
@@ -19,18 +19,18 @@ const CREATE_TREATMENT_CATEGORY = gql`
 `;
 
 const UPDATE_TREATMENT_CATEGORY = gql`
-	mutation updateTreatmentCategory($treatmentCategoryId: int!, $nameEn: String!, $nameFr: String!, $nameMg: String!){
+	mutation updateTreatmentCategory($treatmentCategoryId: ID!, $nameEn: String!, $nameFr: String!, $nameMg: String!){
 		updateTreatmentCategory(input:{
-			treatmentCategoryId: $treatmentCategoryId,
 			nameEn: $nameEn,
 			nameFr: $nameFr,
-			nameMg: $nameMg
+			nameMg: $nameMg,
+			treatmentCategoryId: $treatmentCategoryId
 		}){
 			treatmentCategory{
 				id,
 				nameEn,
-				nameMg,
-				nameFr
+				nameFr,
+				nameMg
 			}
 			errors
 		}
