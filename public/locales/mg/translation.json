@@ -1,7 +1,28 @@
 {
 	"homepage": {
 		"title": "Izaho dia :",
-		"botton1":"Marary",
-		"botton2":"Dokotera"
-	}
+		"botton1": "Marary",
+		"botton2": "Dokotera"
+	},
+	"listTreatment":{
+		"doctor":{
+			"titleMain": "Hanampy fomba fitsaboana vaovao",
+			"title": "IREO FOMBA FITSABOANA MISY",
+			"small": "Azonao atao ny misafidy ny fomba fitsaboana amin'ireto lisitra ireto"
+		},
+		"public":{
+			"message": "Mbola tsy misy lisitra na fomba fitsaboana aminito sokajy ito",
+			"botton": "Hiverina"
+		}
+	},
+    "listTreatmentCategory":{
+        "doctor":{
+            "titleMain": "Hanampy sokajy na fomba fitsaboana vaovao"
+        },
+        "public":{
+            "title": "SOKAJY NA FOMBA FITSABOANA MISY",
+            "small": "Fomba fitsaboana inona no tadiavinao?",
+            "message": "Mbola tsy misy sokajy na fomba fitsaboana ato"
+        }
+    }
 }

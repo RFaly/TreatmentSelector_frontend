@@ -1,7 +1,28 @@
 {
-  "homepage": {
+	"homepage": {
 		"title": "I am a :",
-		"botton1":"Patient",
-		"botton2":"Doctor"
-  }
+		"botton1": "Patient",
+		"botton2": "Doctor"
+	},
+	"listTreatment":{
+		"doctor":{
+			"titleMain": "Add a new treatment",
+			"title": "AVAILABLE TREATMENTS",
+			"small": "You can choose the treatment from this lists."
+		},
+		"public":{
+			"message": "No treatment available in this category",
+			"botton": "Back"
+		}
+	},
+    "listTreatmentCategory":{
+        "doctor":{
+            "titleMain": "Add a new treatment category"
+        },
+        "public":{
+            "title": "AVAILABLE TREATMENT CATEGORY",
+            "small":"What treatment do you want?",
+            "message": "No treatment in this list"
+        }
+    }
 }

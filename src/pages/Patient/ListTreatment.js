@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 import { FaPlusSquare, FaTrash, FaEdit } from 'react-icons/fa';
+import { Trans, useTranslation } from "react-i18next";
 
 import Treatment from './Components/Treatment'
 import FormConfirmed from './Components/FormConfirmed'
@@ -12,6 +13,7 @@ import { DESTROY_TREATMENT } from '../../services/mutations/MutationsTreatment';
 
 
 function ListTreatment (props) {
+	let { t, i18n } = useTranslation();
 	const [treatment, setTreatment] = useState(null);
 	let path = props.match.path
 
@@ -55,7 +57,7 @@ function ListTreatment (props) {
 			{
 				path==='/doctor' ? 
 					<React.Fragment>
-						<h2>Ajouter un nouveau traitement</h2>
+						<h2>{t("listTreatment.doctor.titleMain")}</h2>
 						<FaPlusSquare type="button" className="add-btn-css" data-toggle="modal" data-target="#exampleModalCenter0" />
 						<CreateTreatment treatmentItem={0} treatmentCategory={props.treatmentCategory} />
 					</React.Fragment>
@@ -68,16 +70,16 @@ function ListTreatment (props) {
 					<React.Fragment>
 						{ path==='/doctor' ?  null : 
 							<h2>
-								LES TRAITMENTS DISPONIBLES<br/>
-								<small>"Vous pouvez choisir le traitement parmi ses listes"</small>
-							</h2>
+								{t("listTreatment.doctor.title")}<br/>
+								<small>"{t("listTreatment.doctor.small")}"</small>
+								</h2>
 						}
 
 						<h2>{ props.treatmentCategory.nameEn }:</h2>
 						
 							{
 								data.treatments.length === 0 ? 
-									<p>Aucun traitement dans cette liste</p>
+									<p>{t("listTreatment.public.message")}</p>
 								:
 								<div className="card-columns text-center">
 									{
@@ -103,7 +105,7 @@ function ListTreatment (props) {
 							}
 
 						<button className="btn pointer" onClick={props.selectTreatmentCategory.bind(this,null)}>
-							Back
+							{t("listTreatment.public.botton")}
 						</button>
 					</React.Fragment>
 			}

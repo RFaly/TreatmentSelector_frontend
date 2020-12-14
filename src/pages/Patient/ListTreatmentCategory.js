@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { useMutation } from '@apollo/client';
-
+import { Trans, useTranslation } from "react-i18next";
 import { FaTrash,FaEdit,FaPlusSquare } from 'react-icons/fa';
 
 import { TREATMENT_CATEGORIES } from '../../services/queries/TreatmentCategoriesQueries';
@@ -11,6 +11,8 @@ import TreatmentCategory from './Components/TreatmentCategory';
 import CreateTreatmentCategory from '../Dashboard/CreateTreatmentCategory'
 
 function ListTreatmentCategory(props){
+	let { t, i18n } = useTranslation();
+
 	const {loading, error, data} = useQuery(TREATMENT_CATEGORIES);
 
 	const [ destroyTreatmentCategory] = useMutation(DESTROY_TREATMENT_CATEGORY);
@@ -41,22 +43,22 @@ function ListTreatmentCategory(props){
 			{
 				props.match.path==='/doctor' ?
 					<div>
-						<h2>Ajouter un nouveau categorie de traitement</h2>
+						<h2>{t("listTreatmentCategory.doctor.titleMain")}</h2>
 						<FaPlusSquare type="button" className="add-btn-css" data-toggle="modal" data-target="#exampleModalCenter0" />
 						<CreateTreatmentCategory treatmentCategory={0} />
 					</div>
 					:
 					<React.Fragment>
 						<h2>
-							CATEGORIE DE TRAITEMENT DISPONIBLE<br/>
-							<small>"Quelle traitement vous voulez?"</small>
+							{t("listTreatmentCategory.public.title")}<br/>
+							<small>"{t("listTreatmentCategory.public.small")}"</small>
 						</h2>
 					</React.Fragment>
 			}
 
 			{
 				data.treatmentCategories.length === 0 ? 
-					<p>Aucun traitement dans cette liste</p>
+					<p>{t("listTreatmentCategory.public.message")}</p>
 				:
 				<div className="card-columns text-center" id="listTC-container">
 					{

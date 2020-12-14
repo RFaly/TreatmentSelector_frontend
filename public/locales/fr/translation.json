@@ -1,19 +1,39 @@
 {
-  "homepage": {
-    "title": "Je suis un :",
-    "botton1":"Patiente",
-    "botton2":"Docteur"
-  },
-  "dashbord": {
-  	"title": "Ajouter un nouveau traitement",
-  	"modaltitle": "Entrer le nom du traitement",
-	"label": "Version anglais",
-	"label": "Version français",
-	"label": "Version malagasy",
-  	"botton1":"Annuler",
-    "botton2":"Confirmer",
-	"mutationLoading": "Chargement...",
-	"mutationError": "Erreur: (Veuillez réessayer)",
-	"mutationsData": "Données sauvegardées"
-  }
+    "homepage": {
+        "title": "Je suis un :",
+        "botton1":"Patiente",
+        "botton2":"Docteur"
+    },
+    "listTreatment":{
+        "doctor":{
+            "titleMain": "Ajouter un nouveau traitement",
+            "title":"LES TRAITMENTS DISPONIBLES",
+            "small":"Vous pouvez choisir le traitement parmi ce liste"
+        },
+        "public":{
+            "message": "Aucun traitement disponible dans cette categorie",
+            "botton": "Retour"
+        }
+    },
+    "listTreatmentCategory":{
+        "doctor":{
+            "titleMain": "Ajouter un nouveau categorie de traitement"
+        },
+        "public":{
+            "title": "LES CATEGORIES DE TRAITEMENT DISPONIBLE",
+            "small":"Quelle traitement vous voulez?",
+            "message": "Aucun categorie de traitement disponible"
+        }
+    },
+    "dashbord": {
+        "modaltitle": "Entrer le nom du traitement",
+        "label": "Version anglais",
+        "label": "Version français",
+        "label": "Version malagasy",
+        "botton1":"Annuler",
+        "botton2":"Confirmer",
+        "mutationLoading": "Chargement...",
+        "mutationError": "Erreur: (Veuillez réessayer)",
+        "mutationsData": "Données sauvegardées"
+    }
 }
