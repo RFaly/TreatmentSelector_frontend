@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import $ from 'jquery';
+import { useTranslation } from "react-i18next";
 
 import { CREATE_TREATMENT, UPDATE_TREATMENT } from '../../services/mutations/MutationsTreatment';
 import { TREATMENTS } from '../../services/queries/TreatmentCategoriesQueries';
 
 function CreateTreatment({treatmentCategory,treatmentItem}) {
 
+	let { t, i18n } = useTranslation();
 	const [nameEn,setNameEn] = useState(treatmentItem === 0 ? '' : treatmentItem.nameEn)
 	const [nameFr,setNameFr] = useState(treatmentItem === 0 ? '' : treatmentItem.nameFr)
 	const [nameMg,setNameMg] = useState(treatmentItem === 0 ? '' : treatmentItem.nameMg)
@@ -64,9 +66,9 @@ function CreateTreatment({treatmentCategory,treatmentItem}) {
 			      <div className="modal-header">
 			        <h5 className="modal-title" id="exampleModalCenterTitle">
 			        	{ treatmentItem === 0 ? 
-							"Crée un nouveau traitement"
+							`${t("createTreatment.create.title")}`
 						: 
-							`Modification du traitment suivant : "${treatmentItem.nameEn}"`
+							`${t("createTreatment.edit.title")} : "${treatmentItem.nameEn}"`
 						}
 			        </h5>
 			        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
@@ -78,29 +80,29 @@ function CreateTreatment({treatmentCategory,treatmentItem}) {
 					      			(e) => { submitUpdateTreatment(e) } } >
 						<div className="modal-body">
 							<div className="form-group">
-								<label htmlFor="nameEn">Version anglais</label>
+								<label htmlFor="nameEn">{t("createTreatmentCategory.nameEn")}</label>
 								<input type="text" required="required" id="nameEn" className="form-control" name="nameEn" defaultValue={nameEn} onChange={(e)=>{setNameEn(e.target.value)}}/>
 							</div>
 							<div className="form-group">
-								<label htmlFor="nameFr">Version français</label>
+								<label htmlFor="nameFr">{t("createTreatmentCategory.nameFr")}</label>
 								<input type="text" id="nameFr" className="form-control" name="nameFr" defaultValue={nameFr} onChange={(e)=>{setNameFr(e.target.value)}}/>
 							</div>
 							<div className="form-group">
-								<label htmlFor="nameMg">Version malagasy</label>
+								<label htmlFor="nameMg">{t("createTreatmentCategory.nameMg")}</label>
 								<input type="text" id="nameMg" className="form-control" name="nameMg" defaultValue={nameMg} onChange={(e)=>{setNameMg(e.target.value)}}/>
 							</div>
-							{mutationLoading && <p>Loading...</p>}
-							{mutationError && <p>Error: ( Please try again)</p>}
+							{mutationLoading && <p>{t("mutationLoading")}</p>}
+							{mutationError && <p>{t("mutationError")}</p>}
 							{
 								mutationsData && 
 								<p>
-									Donné sauvegardé
+									{t("mutationsData")}
 								</p>
 							}
 						</div>
 						<div className="modal-footer">
-							<button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="submit" className="btn btn-primary">Confirm</button>
+							<button type="button" className="btn btn-secondary" data-dismiss="modal">{t("createTreatmentCategory.button2")}</button>
+							<button type="submit" className="btn btn-primary">{t("createTreatmentCategory.button1")}</button>
 						</div>
 					</form>
 			    </div>

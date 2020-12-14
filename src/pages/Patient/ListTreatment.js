@@ -71,7 +71,7 @@ function ListTreatment (props) {
 						{ path==='/doctor' ?  null : 
 							<h2>
 								{t("listTreatment.doctor.title")}<br/>
-								<small>"{t("listTreatment.doctor.small")}"</small>
+								<small><strong>{t("etape")} 2:</strong> "{t("listTreatment.doctor.small")}"</small>
 								</h2>
 						}
 

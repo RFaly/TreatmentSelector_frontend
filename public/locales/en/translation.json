@@ -1,4 +1,8 @@
 {
+	"mutationLoading": "Loading...",
+    "mutationError": "Error: ( Please try again)",
+    "mutationsData": "Saved data",
+	"etape": "Stap",
 	"homepage": {
 		"title": "I am a :",
 		"botton1": "Patient",
@@ -23,6 +27,37 @@
             "title": "AVAILABLE TREATMENT CATEGORY",
             "small":"What treatment do you want?",
             "message": "No treatment in this list"
+        }
+    },
+    "formConfirmed": {
+        "title": "Validation of the treatment request",
+        "small": "Please enter your full name to confirm your choice.",
+        "paraph": "Treatment select"
+    },
+    "createPatien": {
+        "input": "Full name",
+        "button1": "Confirm",
+        "button2": "Cancel"
+    },
+    "createTreatmentCategory": {
+        "edit":{
+            "title": "Changing the processing category"
+        },
+        "create":{
+            "title": "Create a new treatment category"
+        },
+        "nameEn": "English version",
+        "nameFr": "French version",
+        "nameMg": "Malagasy version",
+        "button1": "Confirm",
+        "button2": "Close"
+    },
+    "createTreatment":{
+        "edit":{
+            "title": "Modification of the following treatment"
+        },
+        "create":{
+            "title": "Create a new treatment"
         }
     }
 }

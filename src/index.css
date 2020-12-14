@@ -56,3 +56,8 @@ small{
 input:focus {
   border-color: #e84d72;
 }
+
+.listTC-items:hover {
+	/*border: 2 solid #e84d72;
+	color: red;*/
+}

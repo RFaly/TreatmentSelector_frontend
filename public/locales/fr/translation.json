@@ -1,4 +1,8 @@
 {
+    "mutationLoading": "Chargement...",
+    "mutationError": "Erreur: (Veuillez réessayer)",
+    "mutationsData": "Données sauvegardées",
+    "etape": "Etape",
     "homepage": {
         "title": "Je suis un :",
         "botton1":"Patiente",
@@ -25,15 +29,35 @@
             "message": "Aucun categorie de traitement disponible"
         }
     },
-    "dashbord": {
-        "modaltitle": "Entrer le nom du traitement",
-        "label": "Version anglais",
-        "label": "Version français",
-        "label": "Version malagasy",
-        "botton1":"Annuler",
-        "botton2":"Confirmer",
-        "mutationLoading": "Chargement...",
-        "mutationError": "Erreur: (Veuillez réessayer)",
-        "mutationsData": "Données sauvegardées"
+    "formConfirmed": {
+        "title": "Validition de la demande de traitment",
+        "small": "Veillez entrer votre nom complet pour confirmer votre choix",
+        "paraph": "Traitment selectionner"
+    },
+    "createPatien": {
+        "input": "Nom complet",
+        "button1": "Confirmer",
+        "button2": "Annuler"
+    },
+    "createTreatmentCategory": {
+        "edit":{
+            "title": "Modification de la categorie de traitment suivant"
+        },
+        "create":{
+            "title": "Créer un nouveau categorie de traitement"
+        },
+        "nameEn": "Version anglais",
+        "nameFr": "Version français",
+        "nameMg": "Version malagasy",
+        "button1": "Confirmer",
+        "button2": "Fermer"
+    },
+    "createTreatment":{
+        "edit":{
+            "title": "Modification du traitment suivant"
+        },
+        "create":{
+            "title": "Crée un nouveau traitement"
+        }
     }
 }

@@ -51,7 +51,7 @@ function ListTreatmentCategory(props){
 					<React.Fragment>
 						<h2>
 							{t("listTreatmentCategory.public.title")}<br/>
-							<small>"{t("listTreatmentCategory.public.small")}"</small>
+							<small><strong>{t("etape")} 1:</strong> "{t("listTreatmentCategory.public.small")}"</small>
 						</h2>
 					</React.Fragment>
 			}
@@ -63,7 +63,7 @@ function ListTreatmentCategory(props){
 				<div className="card-columns text-center" id="listTC-container">
 					{
 						data.treatmentCategories.map(treatmentCategory => (
-							<div className="card pointer text-left" key={treatmentCategory.id}>
+							<div className="listTC-items card pointer text-left" key={treatmentCategory.id}>
 								{
 									props.match.path==='/doctor' ? 
 										<React.Fragment>

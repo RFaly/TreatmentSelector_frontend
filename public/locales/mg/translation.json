@@ -1,4 +1,8 @@
 {
+	"mutationLoading": "Vetivety fotsiny...",
+    "mutationError": "Hadisoana: (Andramo indray azafady)",
+    "mutationsData": "Voatahiry tsara",
+	"etape": "Dingana",
 	"homepage": {
 		"title": "Izaho dia :",
 		"botton1": "Marary",
@@ -6,23 +10,54 @@
 	},
 	"listTreatment":{
 		"doctor":{
-			"titleMain": "Hanampy fomba fitsaboana vaovao",
+			"titleMain": "Hanampy fitsaboana vaovao",
 			"title": "IREO FOMBA FITSABOANA MISY",
-			"small": "Azonao atao ny misafidy ny fomba fitsaboana amin'ireto lisitra ireto"
+			"small": "Azonao atao ny misafidy ny fitsaboana amin'ireto lisitra ireto"
 		},
 		"public":{
-			"message": "Mbola tsy misy lisitra na fomba fitsaboana aminito sokajy ito",
+			"message": "Mbola tsy misy lisitra na fitsaboana aminito sokajy ito",
 			"botton": "Hiverina"
 		}
 	},
     "listTreatmentCategory":{
         "doctor":{
-            "titleMain": "Hanampy sokajy na fomba fitsaboana vaovao"
+            "titleMain": "Hanampy sokajy na fitsaboana vaovao"
         },
         "public":{
             "title": "SOKAJY NA FOMBA FITSABOANA MISY",
             "small": "Fomba fitsaboana inona no tadiavinao?",
-            "message": "Mbola tsy misy sokajy na fomba fitsaboana ato"
+            "message": "Mbola tsy misy sokajy na fitsaboana ato"
+        }
+    },
+    "formConfirmed": {
+        "title": "Fanamarinana ny fangatahana fitsaboana",
+        "small": "Ampidiro ny anaranao feno mba hanamafisana ny safidinao",
+        "paraph": "Fitsaboana no safidianao"
+    },
+    "createPatien": {
+        "input": "Anarana feno",
+        "button1": "Manamarina",
+        "button2": "Hiverina"
+    },
+    "createTreatmentCategory": {
+        "edit":{
+            "title": "Hanova anarana sokajy fitsaboana"
+        },
+        "create":{
+            "title": "Hamorona sokajy fitsaboana vaovao"
+        },
+        "nameEn": "Dikan-teny anglisy",
+        "nameFr": "Dikan-teny frantsay",
+        "nameMg": "Dikan-teny malagasy",
+        "button1": "Manamarina",
+        "button2": "Akatona"
+    },
+    "createTreatment":{
+        "edit":{
+            "title": "Hovaina ito fitsaboana manaraka ito"
+        },
+        "create":{
+            "title": "Hamorona fitsaboana vaovao"
         }
     }
 }

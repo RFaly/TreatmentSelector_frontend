@@ -2,7 +2,7 @@ import React from 'react';
 import { FaAngleRight } from 'react-icons/fa';
 import { Trans, useTranslation } from "react-i18next";
 
-const Treatment = ({treatment}) => {
+const Treatment = ({treatment, noIcone}) => {
 	
 	let { t, i18n } = useTranslation();
 	let language = i18n.language;
@@ -17,7 +17,7 @@ const Treatment = ({treatment}) => {
 	}
 
 	return(
-		<span><FaAngleRight className="rose" /> {treatmentName}</span>
+		<span>{noIcone == true ? null : <FaAngleRight className="rose" />}{treatmentName}</span>
 	)
 }
 
