@@ -4,7 +4,7 @@ import { CREATE_PATIENT } from '../../../services/mutations/MutationsPatient';
 import { useTranslation } from "react-i18next";
 
 function CreatePatient({treatmentId,canceledChoice}) {
-	let { t, i18n } = useTranslation();
+	let { t } = useTranslation();
   	const [ addTodo, { data: mutationsData, loading: mutationLoading, error: mutationError }] = useMutation(CREATE_PATIENT);
 
 	const [params, setParams] = useState({name:'',id:treatmentId});
@@ -18,11 +18,7 @@ function CreatePatient({treatmentId,canceledChoice}) {
 		e.preventDefault();
 		addTodo({ variables: { name:params.name , treatmentId: parseInt(params.id) } });
 	}
-
-	if (mutationsData){
-		console.log("dsfsdf",mutationsData)
-	}
-
+	
 	return(
 		<div>
 			<form onSubmit={ (e) => { createPatientMutation(e) }}>

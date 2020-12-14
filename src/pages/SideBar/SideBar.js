@@ -5,14 +5,14 @@ import { FaClinicMedical, FaUserInjured, FaUserMd } from 'react-icons/fa';
 // FaListAlt, FaCheckSquare, FaPlusSquare, FaTrash
 import './SideBar.css';
 
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import en from './en.png';
 import fr from './fr.png';
 import mg from './mg.png';
 
 const SideBar = ({selectTreatmentCategory}) => {
-	let { t, i18n } = useTranslation();
+	let { i18n } = useTranslation();
 
 	let changeLanguage = (language) => {
 		i18n.changeLanguage(language);

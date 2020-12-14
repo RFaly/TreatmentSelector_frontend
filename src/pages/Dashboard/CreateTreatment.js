@@ -8,10 +8,10 @@ import { TREATMENTS } from '../../services/queries/TreatmentCategoriesQueries';
 
 function CreateTreatment({treatmentCategory,treatmentItem}) {
 
-	let { t, i18n } = useTranslation();
-	const [nameEn,setNameEn] = useState(treatmentItem === 0 ? '' : treatmentItem.nameEn)
-	const [nameFr,setNameFr] = useState(treatmentItem === 0 ? '' : treatmentItem.nameFr)
-	const [nameMg,setNameMg] = useState(treatmentItem === 0 ? '' : treatmentItem.nameMg)
+	let { t } = useTranslation();
+	const [nameEn,setNameEn] = useState(treatmentItem === 0 ? "" : [null].includes(treatmentItem.nameEn) ? "" : treatmentItem.nameEn)
+	const [nameFr,setNameFr] = useState(treatmentItem === 0 ? "" : [null].includes(treatmentItem.nameFr) ? "" : treatmentItem.nameFr)
+	const [nameMg,setNameMg] = useState(treatmentItem === 0 ? "" : [null].includes(treatmentItem.nameMg) ? "" : treatmentItem.nameMg)
 
 	const resetInput = () => {
 		$("#nameEn").val('');

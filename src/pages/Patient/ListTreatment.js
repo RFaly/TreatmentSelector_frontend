@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 import { FaPlusSquare, FaTrash, FaEdit } from 'react-icons/fa';
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import Treatment from './Components/Treatment'
 import FormConfirmed from './Components/FormConfirmed'
@@ -13,7 +13,7 @@ import { DESTROY_TREATMENT } from '../../services/mutations/MutationsTreatment';
 
 
 function ListTreatment (props) {
-	let { t, i18n } = useTranslation();
+	let { t } = useTranslation();
 	const [treatment, setTreatment] = useState(null);
 	let path = props.match.path
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { useMutation } from '@apollo/client';
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { FaTrash,FaEdit,FaPlusSquare } from 'react-icons/fa';
 
 import { TREATMENT_CATEGORIES } from '../../services/queries/TreatmentCategoriesQueries';
@@ -11,7 +11,7 @@ import TreatmentCategory from './Components/TreatmentCategory';
 import CreateTreatmentCategory from '../Dashboard/CreateTreatmentCategory'
 
 function ListTreatmentCategory(props){
-	let { t, i18n } = useTranslation();
+	let { t } = useTranslation();
 
 	const {loading, error, data} = useQuery(TREATMENT_CATEGORIES);
 

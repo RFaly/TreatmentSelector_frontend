@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import Treatment from './Treatment'
 
 const FormConfirmed = ({treatment,canceledChoice}) => {
-	let { t, i18n } = useTranslation();
+	let { t } = useTranslation();
 
 	return(
 		<div>

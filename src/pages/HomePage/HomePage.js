@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 function HomePage() {
-	let { t, i18n } = useTranslation();
+	let { t } = useTranslation();
 	
 	return(
 		<div>

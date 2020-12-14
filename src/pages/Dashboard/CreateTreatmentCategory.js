@@ -7,12 +7,12 @@ import { CREATE_TREATMENT_CATEGORY, UPDATE_TREATMENT_CATEGORY } from '../../serv
 import { TREATMENT_CATEGORIES } from '../../services/queries/TreatmentCategoriesQueries';
 
 function CreateTreatmentCategory(props) {
-	let { t, i18n } = useTranslation();
+	let { t } = useTranslation();
 	const treatmentCategory = props.treatmentCategory
 
-	const [nameEn,setNameEn] = useState(treatmentCategory === 0 ? '' : treatmentCategory.nameEn)
-	const [nameFr,setNameFr] = useState(treatmentCategory === 0 ? '' : treatmentCategory.nameFr)
-	const [nameMg,setNameMg] = useState(treatmentCategory === 0 ? '' : treatmentCategory.nameMg)
+	const [nameEn,setNameEn] = useState(treatmentCategory === 0 ? "" : [null].includes(treatmentCategory.nameEn) ? "" : treatmentCategory.nameEn)
+	const [nameFr,setNameFr] = useState(treatmentCategory === 0 ? "" : [null].includes(treatmentCategory.nameFr) ? "" : treatmentCategory.nameFr)
+	const [nameMg,setNameMg] = useState(treatmentCategory === 0 ? "" : [null].includes(treatmentCategory.nameMg) ? "" : treatmentCategory.nameMg)
 
 	const resetInput = () => {
 		$("#nameEn").val('');
