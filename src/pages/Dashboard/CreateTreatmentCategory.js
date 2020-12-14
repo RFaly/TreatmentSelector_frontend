@@ -32,8 +32,6 @@ function CreateTreatmentCategory(props) {
 		});
 	}
 
-	// const [treatmentCategoryId,setTreatmentCategoryId] = useState(treatmentCategory.id)
-
 	const [ createTreatmentCategory, { loading: mutationLoading, error: mutationError }] = useMutation(CREATE_TREATMENT_CATEGORY,
 		{onCompleted : resetInput, update: updateCache}
 	);
@@ -45,22 +43,17 @@ function CreateTreatmentCategory(props) {
 		);
 	}
 
-	const updateCacheUpdate = (cache, {data}) => {
-		console.log("Bonjour a tous")
-	}
-
 	const [ updateTreatmentCategory ] = useMutation(UPDATE_TREATMENT_CATEGORY
-		,{onCompleted : resetInput, update: updateCacheUpdate}
+		,{onCompleted : resetInput}
 	);
 
 	let submitUpdateTreatmentCategory = (e) => {
 		e.preventDefault();
 		const TC = props.treatmentCategory
 		updateTreatmentCategory({
-		  variables: { variables: { treatmentCategoryId: parseInt(TC.id), nameEn: "nameEn", nameFr: "nameFr", nameMg: "nameMg" }}
+		  variables: { treatmentCategoryId: parseInt(TC.id), nameEn: nameEn, nameFr: nameFr, nameMg: nameMg }
 		});
 	}
-
 
 	return(
 		<div>

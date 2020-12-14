@@ -3,5 +3,17 @@
     "title": "Je suis un :",
     "botton1":"Patiente",
     "botton2":"Docteur"
+  },
+  "dashbord": {
+  	"title": "Ajouter un nouveau traitement",
+  	"modaltitle": "Entrer le nom du traitement",
+	"label": "Version anglais",
+	"label": "Version français",
+	"label": "Version malagasy",
+  	"botton1":"Annuler",
+    "botton2":"Confirmer",
+	"mutationLoading": "Chargement...",
+	"mutationError": "Erreur: (Veuillez réessayer)",
+	"mutationsData": "Données sauvegardées"
   }
 }

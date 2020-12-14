@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useMutation } from '@apollo/client';
-import { FaTrash,FaEdit } from 'react-icons/fa';
+import { FaPlusSquare, FaTrash, FaEdit } from 'react-icons/fa';
 
 import Treatment from './Components/Treatment'
 import FormConfirmed from './Components/FormConfirmed'
@@ -53,9 +53,12 @@ function ListTreatment (props) {
 	return(
 		<div className="text-center">
 			{
-				path==='/doctor' ? (
-					<CreateTreatment treatmentCategory={props.treatmentCategory} />
-				)
+				path==='/doctor' ? 
+					<React.Fragment>
+						<h2>Ajouter un nouveau traitement</h2>
+						<FaPlusSquare type="button" className="add-btn-css" data-toggle="modal" data-target="#exampleModalCenter0" />
+						<CreateTreatment treatmentItem={0} treatmentCategory={props.treatmentCategory} />
+					</React.Fragment>
 				: null
 			}
 			{
@@ -80,8 +83,15 @@ function ListTreatment (props) {
 									{
 										data.treatments.map(treatment => (
 											<div className="card pointer text-left" key={treatment.id}>
-												<FaTrash onClick={e => toDestroyTreatment(e,treatment.id)}/>
-												<FaEdit/>
+												{
+													path==='/doctor' ? 
+														<React.Fragment>
+															<FaTrash onClick={e => toDestroyTreatment(e,treatment.id)}/>
+															<FaEdit data-toggle="modal" data-target={`#exampleModalCenter${treatment.id}`} />
+															<CreateTreatment treatmentItem={treatment} treatmentCategory={props.treatmentCategory} />
+														</React.Fragment>
+													: null
+												}
 												<div onClick={ path === '/doctor' ? null :
 												e => canceledChoice(treatment)}>
 													<Treatment treatment={treatment} />

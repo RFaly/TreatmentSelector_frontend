@@ -19,7 +19,7 @@ const CREATE_TREATMENT_CATEGORY = gql`
 `;
 
 const UPDATE_TREATMENT_CATEGORY = gql`
-	mutation updateTreatmentCategory($treatmentCategoryId: ID!, $nameEn: String!, $nameFr: String!, $nameMg: String!){
+	mutation updateTreatmentCategory($treatmentCategoryId: Int!, $nameEn: String!, $nameFr: String!, $nameMg: String!){
 		updateTreatmentCategory(input:{
 			nameEn: $nameEn,
 			nameFr: $nameFr,

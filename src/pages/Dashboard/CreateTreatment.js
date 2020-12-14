@@ -1,24 +1,21 @@
 import React, { useState } from 'react';
-import { FaPlusSquare } from 'react-icons/fa'
 import { useMutation } from '@apollo/client';
 import $ from 'jquery';
 
-import { CREATE_TREATMENT } from '../../services/mutations/MutationsTreatment';
-//UPDATE_TREATMENT
+import { CREATE_TREATMENT, UPDATE_TREATMENT } from '../../services/mutations/MutationsTreatment';
 import { TREATMENTS } from '../../services/queries/TreatmentCategoriesQueries';
 
-function CreateTreatment({treatmentCategory}) {
-	const [nameEn,setNameEn] = useState('')
-	const [nameFr,setNameFr] = useState('')
-	const [nameMg,setNameMg] = useState('')
+function CreateTreatment({treatmentCategory,treatmentItem}) {
 
-	// const [treatmentCategoryId,setTreatmentCategoryId] = useState(treatmentCategory.id)
+	const [nameEn,setNameEn] = useState(treatmentItem === 0 ? '' : treatmentItem.nameEn)
+	const [nameFr,setNameFr] = useState(treatmentItem === 0 ? '' : treatmentItem.nameFr)
+	const [nameMg,setNameMg] = useState(treatmentItem === 0 ? '' : treatmentItem.nameMg)
 
 	const resetInput = () => {
 		$("#nameEn").val('');
 		$("#nameFr").val('');
 		$("#nameMg").val('');
-	    window.$('#exampleModalCenter').modal('hide');
+		window.$(`#exampleModalCenter${treatmentItem === 0 ? '0' : treatmentItem.id}`).modal('hide');
 	};
 
 	const updateCache = (cache, {data}) => {
@@ -48,22 +45,37 @@ function CreateTreatment({treatmentCategory}) {
 		createTreatment({ variables: { nameEn: nameEn, nameFr: nameFr, nameMg: nameMg, treatmentCategoryId: parseInt(treatmentCategory.id) }});
 	}
 
+	const [ updateTreatment ] = useMutation(UPDATE_TREATMENT
+		,{onCompleted : resetInput}
+	);
+
+	let submitUpdateTreatment = (e) => {
+		e.preventDefault();
+		updateTreatment({
+		  variables: { treatmentId: parseInt(treatmentItem.id), nameEn: nameEn, nameFr: nameFr, nameMg: nameMg }
+		});
+	}
+
 	return(
 		<div>
-
-			<h2>Ajouter un nouveau traitement</h2>
-			<FaPlusSquare type="button" className="add-btn-css" data-toggle="modal" data-target="#exampleModalCenter" />
-
-	        <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	        <div className="modal fade" id={`exampleModalCenter${treatmentItem === 0 ? '0' : treatmentItem.id}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			  <div className="modal-dialog modal-dialog-centered" role="document">
 			    <div className="modal-content">
 			      <div className="modal-header">
-			        <h5 className="modal-title" id="exampleModalCenterTitle">Entrer le nom du traitement</h5>
+			        <h5 className="modal-title" id="exampleModalCenterTitle">
+			        	{ treatmentItem === 0 ? 
+							"Crée un nouveau traitement"
+						: 
+							`Modification du traitment suivant : "${treatmentItem.nameEn}"`
+						}
+			        </h5>
 			        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
-			      	<form onSubmit={ (e) => { submitTreatment(e) }}>
+
+			      	<form onSubmit={ treatmentItem === 0 ? (e) => { submitTreatment(e) } :
+					      			(e) => { submitUpdateTreatment(e) } } >
 						<div className="modal-body">
 							<div className="form-group">
 								<label htmlFor="nameEn">Version anglais</label>
