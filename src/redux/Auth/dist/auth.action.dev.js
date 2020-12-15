@@ -86,6 +86,7 @@ var userLoginAttempt = function userLoginAttempt(_ref) {
         dispatch(authLoginSuccess(token, user));
 
         _history["default"].push('/');
+        window.location.reload()
       }
     })["catch"](function (error) {
       var status = null;
@@ -133,7 +134,8 @@ var userLogoutAttempt = function userLogoutAttempt() {
     window.localStorage.removeItem('user');
 
     _history["default"].push('/');
-
+    window.location.reload()
+    
     return dispatch(authLogoutSuccess());
   };
 };

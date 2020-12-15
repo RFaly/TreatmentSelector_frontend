@@ -1,3 +1,4 @@
+import history from '../../../history';
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CREATE_PATIENT } from '../../../services/mutations/MutationsPatient';
@@ -5,7 +6,12 @@ import { useTranslation } from "react-i18next";
 
 function CreatePatient({treatmentId,canceledChoice}) {
 	let { t } = useTranslation();
-  	const [ addTodo, { data: mutationsData, loading: mutationLoading, error: mutationError }] = useMutation(CREATE_PATIENT);
+
+	const resetInput = () => {
+		console.log("crée tsara aaa...")
+	};
+
+  	const [ addTodo, { data: mutationsData, loading: mutationLoading, error: mutationError }] = useMutation(CREATE_PATIENT, {onCompleted : resetInput});
 
 	const [params, setParams] = useState({name:'',id:treatmentId});
 
@@ -18,7 +24,7 @@ function CreatePatient({treatmentId,canceledChoice}) {
 		e.preventDefault();
 		addTodo({ variables: { name:params.name , treatmentId: parseInt(params.id) } });
 	}
-	
+
 	return(
 		<div>
 			<form onSubmit={ (e) => { createPatientMutation(e) }}>

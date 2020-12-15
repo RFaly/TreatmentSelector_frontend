@@ -8,11 +8,18 @@ import client from './services/GqlConnection';
 
 import './i18n';
 
+import { Provider } from 'react-redux';
+import store from './store';
+
 ReactDOM.render(
-	<ApolloProvider client={client}>
-		<Suspense fallback={<div>Loading...</div>}>
-	      <App />
-	    </Suspense>
-	</ApolloProvider>,
+	<Provider store={store}>
+		<ApolloProvider client={client}>
+			<Suspense fallback={<div>Loading...</div>}>
+				<App />
+		    </Suspense>
+		</ApolloProvider>
+	</Provider>,
 	document.getElementById('root')
 )
+
+

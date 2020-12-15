@@ -1,7 +1,6 @@
 import axios from '../../axios';
 import history from '../../history';
 
-
 export const AUTH_LOGIN_REQUEST = 'AUTH_LOGIN_REQUEST';
 export const AUTH_LOGIN_ERROR = 'AUTH_LOGIN_ERROR';
 export const AUTH_LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS';
@@ -32,19 +31,16 @@ export const authUpdateSuccess = (user) => ({
     user: user
 });
 
-export const userLoginAttempt = ({ email, password }) => {
+export const userLoginAttempt = ({ username, password }) => {
     return (dispatch) => {
         dispatch(authLoginRequest());
         return axios.post('/login', {
-            email: email,
+            username: username,
             password: password
         }).then(response => {
             console.log(response.data)
             if (response.data.error === "Mot de passe ou email incorrect") {
-                
-                
                 const message = 'email ou mot de passe incorrect';
-
                 dispatch((authLoginError(message)))
             } else {
                 const token = response.data.token;
@@ -83,9 +79,7 @@ export const userUpdateAttempt = (user, values) => {
         axios.put(`/users/${user.id}`, values)
         .then(response => {
             if (response.status === 200) {
-                console.log(response.data)
                 const { user } = response.data;
-                console.log(user);
                 dispatch(authUpdateSuccess(user));
             }
         })
