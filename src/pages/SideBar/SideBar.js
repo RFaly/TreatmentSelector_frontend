@@ -33,8 +33,8 @@ const SideBar = (props) => {
 				isAuthenticated ?
 					<React.Fragment>
 						<div className="my-icones"><Link className="btn" to="/doctor" onClick={(e)=>props.selectTreatmentCategory(null)}><FaUserMd /></Link></div>
-						<div className="my-icones">
-							<span className="btn" onClick={() => logout()}>
+						<div className="my-icones" onClick={() => logout()}>
+							<span className="btn">
 								<AiOutlineLogout />
 							</span>
 						</div>
