@@ -2,6 +2,11 @@
     "mutationLoading": "Chargement...",
     "mutationError": "Erreur: (Veuillez réessayer)",
     "mutationsData": "Données sauvegardées",
+    "titleHome": "Accueil",
+    "titlePatient": "Tableau de bord pour le patient",
+    "titleDoctor": "Tableau de bord pour médecin",
+    "titleLogout": "Se déconnecter",
+    "titleLogin": "Se connecter",
     "etape": "Etape",
     "homepage": {
         "title": "Je suis un :",
@@ -39,7 +44,8 @@
     "createPatien": {
         "input": "Nom complet",
         "button1": "Confirmer",
-        "button2": "Annuler"
+        "button2": "Annuler",
+        "notice":"Votre demande de traitement a été bien traité."
     },
     "createTreatmentCategory": {
         "edit":{

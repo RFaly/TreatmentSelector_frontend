@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import history from '../../../history';
 import { useMutation } from '@apollo/client';
 import { CREATE_PATIENT } from '../../../services/mutations/MutationsPatient';
 import { useTranslation } from "react-i18next";
 
 function CreatePatient({treatmentId,canceledChoice}) {
 	let { t } = useTranslation();
-  	const [ addTodo, { data: mutationsData, loading: mutationLoading, error: mutationError }] = useMutation(CREATE_PATIENT);
+  	const [ addPatientToTreatment, { data: mutationsData, loading: mutationLoading, error: mutationError }] = useMutation(CREATE_PATIENT);
 
 	const [params, setParams] = useState({name:'',id:treatmentId});
 
@@ -16,7 +17,12 @@ function CreatePatient({treatmentId,canceledChoice}) {
 	let createPatientMutation = (e) => {
 		document.getElementById("name_patient").value = "";
 		e.preventDefault();
-		addTodo({ variables: { name:params.name , treatmentId: parseInt(params.id) } });
+		addPatientToTreatment({ variables: { name:params.name , treatmentId: parseInt(params.id) } });
+
+		setTimeout(() => {
+			history.push("/")
+			window.location.reload()
+		}, 5000);
 	}
 	
 	return(
@@ -31,8 +37,12 @@ function CreatePatient({treatmentId,canceledChoice}) {
 				</div>
 			</form>
 			{mutationLoading && <p>{t("mutationLoading")}</p>}
-	        {mutationError && <p>{t("mutationError")}</p>}
-	        {mutationsData && <p>{t("mutationsData")}</p>}
+	        {mutationError && <p className="alert alert-danger">{t("mutationError")}</p>}
+	        {
+	        	mutationsData && <p className="alert alert-success">
+	        		{t("createPatien.notice")}
+	        	</p>
+	        }
 	    </div>
 	)
 }

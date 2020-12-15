@@ -2,6 +2,11 @@
 	"mutationLoading": "Loading...",
     "mutationError": "Error: ( Please try again)",
     "mutationsData": "Saved data",
+    "titleHome":"Home",
+    "titlePatient":"Dashbord for patient",
+    "titleDoctor":"Dashbord for doctor",
+    "titleLogout":"Log out",
+    "titleLogin":"Sing in",
 	"etape": "Stap",
 	"homepage": {
 		"title": "I am a :",
@@ -39,7 +44,8 @@
     "createPatien": {
         "input": "Full name",
         "button1": "Confirm",
-        "button2": "Cancel"
+        "button2": "Cancel",
+        "notice":"Your treatment request has been handled successfully."
     },
     "createTreatmentCategory": {
         "edit":{

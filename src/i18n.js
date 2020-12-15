@@ -9,6 +9,8 @@ if (language === null) {
   language = "en"
   if (/^fr\b/.test(window.navigator.language)) {
   	language = "fr"
+  }else if(/^mg\b/.test(window.navigator.language)){
+    language = "mg"
   }
   localStorage.setItem('languageNavigator', language);
 }

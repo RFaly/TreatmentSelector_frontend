@@ -8,7 +8,7 @@
 }
 
 body{
-	background-color: #208fd8;
+	background-color: #e84d72;
 	font-size: 1.5em;
 }
 
@@ -60,4 +60,9 @@ input:focus {
 .listTC-items:hover {
 	/*border: 2 solid #e84d72;
 	color: red;*/
+}
+
+.btn.btn-primary{
+	background-color: #208fd8 !important;
+	border: 2px solid #208fd8 !important;
 }

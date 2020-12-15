@@ -2,6 +2,11 @@
 	"mutationLoading": "Vetivety fotsiny...",
     "mutationError": "Hadisoana: (Andramo indray azafady)",
     "mutationsData": "Voatahiry tsara",
+    "titleHome": "Home",
+    "titlePatient": "Pejy ho an'ny marary",
+    "titleDoctor": "Pejy ho an'ny dokotera",
+    "titleLogout": "hivoaka",
+    "titleLogin": "Hiditra",
 	"etape": "Dingana",
 	"homepage": {
 		"title": "Izaho dia :",
@@ -39,7 +44,8 @@
     "createPatien": {
         "input": "Anarana feno",
         "button1": "Manamarina",
-        "button2": "Hiverina"
+        "button2": "Hiverina",
+        "notice": "Vita soa aman-tsara ny fangatahanao fitsaboana."
     },
     "createTreatmentCategory": {
         "edit":{

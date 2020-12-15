@@ -12,12 +12,14 @@ function CreateTreatment({treatmentCategory,treatmentItem}) {
 	const [nameEn,setNameEn] = useState(treatmentItem === 0 ? "" : [null].includes(treatmentItem.nameEn) ? "" : treatmentItem.nameEn)
 	const [nameFr,setNameFr] = useState(treatmentItem === 0 ? "" : [null].includes(treatmentItem.nameFr) ? "" : treatmentItem.nameFr)
 	const [nameMg,setNameMg] = useState(treatmentItem === 0 ? "" : [null].includes(treatmentItem.nameMg) ? "" : treatmentItem.nameMg)
+	
+	let indexId = treatmentItem === 0 ? 0 : treatmentItem.id
 
 	const resetInput = () => {
-		$("#nameEn").val('');
-		$("#nameFr").val('');
-		$("#nameMg").val('');
-		window.$(`#exampleModalCenter${treatmentItem === 0 ? '0' : treatmentItem.id}`).modal('hide');
+		$("#nameEn"+indexId).val('');
+		$("#nameFr"+indexId).val('');
+		$("#nameMg"+indexId).val('');
+		window.$(`#exampleModalCenter${indexId}`).modal('hide');
 	};
 
 	const updateCache = (cache, {data}) => {
@@ -60,7 +62,7 @@ function CreateTreatment({treatmentCategory,treatmentItem}) {
 
 	return(
 		<div>
-	        <div className="modal fade" id={`exampleModalCenter${treatmentItem === 0 ? '0' : treatmentItem.id}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	        <div className="modal fade" id={`exampleModalCenter${indexId}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			  <div className="modal-dialog modal-dialog-centered" role="document">
 			    <div className="modal-content">
 			      <div className="modal-header">
@@ -80,16 +82,16 @@ function CreateTreatment({treatmentCategory,treatmentItem}) {
 					      			(e) => { submitUpdateTreatment(e) } } >
 						<div className="modal-body">
 							<div className="form-group">
-								<label htmlFor="nameEn">{t("createTreatmentCategory.nameEn")}</label>
-								<input type="text" required="required" id="nameEn" className="form-control" name="nameEn" defaultValue={nameEn} onChange={(e)=>{setNameEn(e.target.value)}}/>
+								<label htmlFor={`nameEn${indexId}`}>{t("createTreatmentCategory.nameEn")}</label>
+								<input type="text" required="required" id={`nameEn${indexId}`} className="form-control" name="nameEn" defaultValue={nameEn} onChange={(e)=>{setNameEn(e.target.value)}}/>
 							</div>
 							<div className="form-group">
-								<label htmlFor="nameFr">{t("createTreatmentCategory.nameFr")}</label>
-								<input type="text" id="nameFr" className="form-control" name="nameFr" defaultValue={nameFr} onChange={(e)=>{setNameFr(e.target.value)}}/>
+								<label htmlFor={`nameFr${indexId}`}>{t("createTreatmentCategory.nameFr")}</label>
+								<input type="text" id={`nameFr${indexId}`} className="form-control" name="nameFr" defaultValue={nameFr} onChange={(e)=>{setNameFr(e.target.value)}}/>
 							</div>
 							<div className="form-group">
-								<label htmlFor="nameMg">{t("createTreatmentCategory.nameMg")}</label>
-								<input type="text" id="nameMg" className="form-control" name="nameMg" defaultValue={nameMg} onChange={(e)=>{setNameMg(e.target.value)}}/>
+								<label htmlFor={`nameMg${indexId}`}>{t("createTreatmentCategory.nameMg")}</label>
+								<input type="text" id={`nameMg${indexId}`} className="form-control" name="nameMg" defaultValue={nameMg} onChange={(e)=>{setNameMg(e.target.value)}}/>
 							</div>
 							{mutationLoading && <p>{t("mutationLoading")}</p>}
 							{mutationError && <p>{t("mutationError")}</p>}
