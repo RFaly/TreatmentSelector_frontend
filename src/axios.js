@@ -1,5 +1,4 @@
 import axios from 'axios';
-import history from './history';
 import store from './store';
 import { userLogoutAttempt } from './redux/Auth/auth.action';
 

@@ -23,34 +23,38 @@ class App extends React.Component {
 		const { isAuthenticated } = this.props;
 		return(
 			<BrowserRouter>
+			<div className="container">
 				<nav>
 					<SideBar selectTreatmentCategory={this.selectTreatmentCategory} />
 				</nav>
 				<div id="main-div" className="d-flex flex-wrap justify-content-center align-items-center" >
-					<SignIn />
-					<Switch>
-						<Route path="/patient">
-							{ (props) => 
-								this.state.selectedTreatmentCategory ?
-								<ListTreatment {...props} pathName="/patient" treatmentCategory={this.state.selectedTreatmentCategory} selectTreatmentCategory={this.selectTreatmentCategory} /> :
-								<ListTreatmentCategory {...props} selectTreatmentCategory={this.selectTreatmentCategory} />
-							}
-						</Route>
-						{
-							isAuthenticated ?
-							<Route path="/doctor">
-								{	(props) => 
+					<div id="paddin-left">
+						<SignIn />
+						<Switch>
+							<Route path="/patient">
+								{ (props) => 
 									this.state.selectedTreatmentCategory ?
-									<ListTreatment {...props} pathName="/doctor" treatmentCategory={this.state.selectedTreatmentCategory} selectTreatmentCategory={this.selectTreatmentCategory} /> :
+									<ListTreatment {...props} pathName="/patient" treatmentCategory={this.state.selectedTreatmentCategory} selectTreatmentCategory={this.selectTreatmentCategory} /> :
 									<ListTreatmentCategory {...props} selectTreatmentCategory={this.selectTreatmentCategory} />
 								}
 							</Route>
-							: null
-						}
+							{
+								isAuthenticated ?
+								<Route path="/doctor">
+									{	(props) => 
+										this.state.selectedTreatmentCategory ?
+										<ListTreatment {...props} pathName="/doctor" treatmentCategory={this.state.selectedTreatmentCategory} selectTreatmentCategory={this.selectTreatmentCategory} /> :
+										<ListTreatmentCategory {...props} selectTreatmentCategory={this.selectTreatmentCategory} />
+									}
+								</Route>
+								: null
+							}
 
-						<Route path="/" component={HomePage} />
-					</Switch>
+							<Route path="/" component={HomePage} />
+						</Switch>
+					</div>
 				</div>
+			</div>
 			</BrowserRouter>
 		)
 	}
