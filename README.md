@@ -87,3 +87,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 		* ▶ cd TreatmentSelector_frontend 
 		* ▶ npm install
 		* ▶ npm start
+	
+	* connect to admin doctor
+		* ▶ email: doctor@admin.site
+		* ▶ password:doctor@admin.site
