@@ -34,6 +34,7 @@ class App extends React.Component {
 					}
 					<Switch>
 						<Route exact path="/signin" component={SignIn} />
+						<SignIn />
 						<Route path="/patient">
 							{ (props) => 
 								this.state.selectedTreatmentCategory ?
