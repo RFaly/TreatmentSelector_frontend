@@ -40,7 +40,7 @@ export const userLoginAttempt = ({ email, password }) => {
             password: password
         }).then(response => {
             console.log(response.data)
-            if (response.data.error === "Mot de passe ou email incorrect") {
+            if (response.data.error === "Invalid username or password") {
                 const message = 'email ou mot de passe incorrect';
                 dispatch((authLoginError(message)))
             } else {
