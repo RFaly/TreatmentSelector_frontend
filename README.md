@@ -72,3 +72,18 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 *run:
   cd treatment_selector_frontend
   npm start
+
+
+* Run all app
+	* ruby on rails
+		* ▶ git clone https://github.com/RFaly/TreatmentSelector_backend.git
+		* ▶ cd TreatmentSelector_backend 
+		* ▶ bundle install
+		* ▶ rails db:create db:migrate db:seed
+		* ▶ rails s -p 4000                           
+
+	* react
+		* ▶ git clone https://github.com/RFaly/TreatmentSelector_frontend.git
+		* ▶ cd TreatmentSelector_frontend 
+		* ▶ npm install
+		* ▶ npm start
