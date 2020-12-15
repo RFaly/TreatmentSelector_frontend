@@ -41,17 +41,14 @@ export const userLoginAttempt = ({ email, password }) => {
         }).then(response => {
             console.log(response.data)
             if (response.data.error === "Mot de passe ou email incorrect") {
-                
-                
                 const message = 'email ou mot de passe incorrect';
-
                 dispatch((authLoginError(message)))
             } else {
                 const token = response.data.token;
                 const user = response.data.user ? response.data.user : null;
-
                 dispatch((authLoginSuccess(token, user)))
-                history.push('/');
+                history.push('/doctor');
+                window.location.reload()
             }
         }).catch(error => {
             let status = null;
@@ -98,6 +95,7 @@ export const userLogoutAttempt = () => {
         window.localStorage.removeItem('jwtToken');
         window.localStorage.removeItem('user');
         history.push('/');
+        window.location.reload()
         return dispatch(authLogoutSuccess());
     }
     

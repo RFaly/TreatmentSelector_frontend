@@ -1,11 +1,16 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import { connect } from 'react-redux';
 
 import HomePage from './HomePage/HomePage';
 import SideBar from './SideBar/SideBar';
 
 import ListTreatmentCategory from './Patient/ListTreatmentCategory';
 import ListTreatment from './Patient/ListTreatment';
+
+
+import SignIn from "./Dashboard/SignIn";
+
 
 class App extends React.Component {
 	state = {
@@ -17,13 +22,18 @@ class App extends React.Component {
 	}
 
 	render(){
+		const { isAuthenticated} = this.props;
 		return(
 			<BrowserRouter>
 				<nav>
 					<SideBar selectTreatmentCategory={this.selectTreatmentCategory} />
 				</nav>
 				<div id="main-div" className="d-flex flex-wrap justify-content-center align-items-center" >
+					{ isAuthenticated ? <h1>Connecté</h1> :
+						<h1>Non connecté</h1>
+					}
 					<Switch>
+						<Route exact path="/signin" component={SignIn} />
 						<Route path="/patient">
 							{ (props) => 
 								this.state.selectedTreatmentCategory ?
@@ -46,7 +56,13 @@ class App extends React.Component {
 	}
 }
 
-export default App
+const mapStateToprops =(state) => {
+  return {
+    ...state.auth
+  }
+}
+
+export default connect(mapStateToprops)(App);
 
 /*
 constructor(props){
