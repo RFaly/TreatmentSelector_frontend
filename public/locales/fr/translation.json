@@ -12,7 +12,8 @@
         "doctor":{
             "titleMain": "Ajouter un nouveau traitement",
             "title":"LES TRAITMENTS DISPONIBLES",
-            "small":"Vous pouvez choisir le traitement parmi ce liste"
+            "small":"Vous pouvez choisir le traitement parmi ce liste",
+            "confirm": "Vous êtes sure de supprimer ce traitement ?"
         },
         "public":{
             "message": "Aucun traitement disponible dans cette categorie",
@@ -21,7 +22,8 @@
     },
     "listTreatmentCategory":{
         "doctor":{
-            "titleMain": "Ajouter un nouveau categorie de traitement"
+            "titleMain": "Ajouter un nouveau categorie de traitement",
+            "confirm": "Vous êtes sure de supprimer ce catégorie de traitement ?"
         },
         "public":{
             "title": "LES CATEGORIES DE TRAITEMENT DISPONIBLE",
@@ -59,5 +61,14 @@
         "create":{
             "title": "Crée un nouveau traitement"
         }
+    },
+    "signIn":{
+        "title": "Vous devez vous connecter pour continuer.",
+        "email": "Adresse e-mail",
+        "password": "Mot de passe",
+        "error": "Le champ ne doit pas être vide",
+        "button1": "Fermer",
+        "button2": "Se connecter",
+        "renderError": "Email ou mot de passe invalide."
     }
 }

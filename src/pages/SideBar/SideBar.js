@@ -17,6 +17,7 @@ const SideBar = (props) => {
 
 	let changeLanguage = (language) => {
 		i18n.changeLanguage(language);
+		localStorage.setItem('languageNavigator', language);
 	};
 
 	const logout = () => {
@@ -34,14 +35,14 @@ const SideBar = (props) => {
 					<React.Fragment>
 						<div className="my-icones"><Link className="btn" to="/doctor" onClick={(e)=>props.selectTreatmentCategory(null)}><FaUserMd /></Link></div>
 						<div className="my-icones" onClick={() => logout()}>
-							<span className="btn">
+							<span className="btn" id="log">
 								<AiOutlineLogout />
 							</span>
 						</div>
 					</React.Fragment>
 				:
 					<div className="my-icones" data-toggle="modal" data-target="#exampleModalCenter">
-						<span className="btn">
+						<span className="btn" id="log">
 							<FaUserMd/>
 						</span>
 					</div>

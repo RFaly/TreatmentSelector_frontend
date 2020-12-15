@@ -2,17 +2,22 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
-import { userLoginAttempt } from '../../redux/Auth/auth.action';
+import { withTranslation } from "react-i18next";
 
-const LoginSchema = Yup.object().shape({
-    email: Yup.string()
-        .required('Le champ ne doit pas être vide'),
-    password: Yup.string()
-        .required('Le champ ne doit pas être vide')
-});
+import { userLoginAttempt } from '../../redux/Auth/auth.action';
 
 class Signup extends React.Component{
     render(){
+
+      const { t } = this.props;
+
+      const LoginSchema = Yup.object().shape({
+          email: Yup.string()
+              .required("error"),
+          password: Yup.string()
+              .required("error")
+      });
+
       const { error } = this.props
       return(
      
@@ -33,7 +38,7 @@ class Signup extends React.Component{
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="exampleModalCenterTitle">
-                    Connecter vous pour continuer
+                    {t("signIn.title")}
                   </h5>
                   <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -42,21 +47,24 @@ class Signup extends React.Component{
                 <center>
                   <Form className="  px-10" >
                     <div className="form-group ml-3 mr-3">
-                      <label htmlFor="email">Adresse e-mail</label>
-                      <Field name="email" id="email" className="form-control" placeholder="Adresse e-mail" />
-                      { errors.email && touched.email ? ( <div className="alert alert-danger">{errors.email}</div>) : null }
+                      <label htmlFor="email">{t("signIn.email")}</label>
+                      <Field name="email" id="email" className="form-control" placeholder={t("signIn.email")} />
+                      { errors.email && touched.email ? ( <div className="alert alert-danger mt-2">{t("signIn.error")}</div>) : null }
                     </div>
                     <div className="form-group ml-3 mr-3">
-                      <label htmlFor="password">Mot de passe</label>
-                      <Field name="password" id="password" type="password" className="form-control" placeholder="Mot de passe" />
-                      { errors.password && touched.password ? (<div className="alert alert-danger">{errors.password}</div>) : null }
-                      <label className="alert alert-danger">
-                        { error }
-                      </label>
+                      <label htmlFor="password">{t("signIn.password")}</label>
+                      <Field name="password" id="password" type="password" className="form-control" placeholder={t("signIn.password")} />
+                      { errors.password && touched.password ? (<div className="alert alert-danger mt-2">{t("signIn.error")}</div>) : null }
+                      { error ? 
+                        <label className="alert alert-danger mt-2">
+                          {t("signIn.renderError")}
+                        </label>
+                        : 
+                        null }
                     </div>
                     <div className="modal-footer">
-                      <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button className="btn btn-primary"  type="submit">Se connecter</button>
+                      <button type="button" className="btn btn-secondary" data-dismiss="modal">{t("signIn.button1")}</button>
+                      <button className="btn btn-primary"  type="submit">{t("signIn.button2")}</button>
                     </div>
                   </Form>
                 </center>
@@ -82,5 +90,6 @@ const mapDispatchToProps = (dispatch) => {
         userLoginAttempt: (values) => {dispatch(userLoginAttempt(values))}
     }
 }
-  export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Signup));
   

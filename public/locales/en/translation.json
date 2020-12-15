@@ -12,7 +12,8 @@
 		"doctor":{
 			"titleMain": "Add a new treatment",
 			"title": "AVAILABLE TREATMENTS",
-			"small": "You can choose the treatment from this lists."
+			"small": "You can choose the treatment from this lists.",
+            "confirm": "Are you sure you want to remove this treatment?"
 		},
 		"public":{
 			"message": "No treatment available in this category",
@@ -21,7 +22,8 @@
 	},
     "listTreatmentCategory":{
         "doctor":{
-            "titleMain": "Add a new treatment category"
+            "titleMain": "Add a new treatment category",
+            "confirm": "Are you sure you want to remove this processing category?"
         },
         "public":{
             "title": "AVAILABLE TREATMENT CATEGORY",
@@ -59,5 +61,14 @@
         "create":{
             "title": "Create a new treatment"
         }
+    },
+    "signIn":{
+        "title": "You must log in to continue.",
+        "email": "E-mail adress",
+        "password": "Password",
+        "error": "The field must not be empty.",
+        "button1": "Close",
+        "button2": "Log in",
+        "renderError": "Invalid e-mail or password."
     }
 }

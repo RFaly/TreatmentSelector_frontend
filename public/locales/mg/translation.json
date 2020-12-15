@@ -12,7 +12,8 @@
 		"doctor":{
 			"titleMain": "Hanampy fitsaboana vaovao",
 			"title": "IREO FOMBA FITSABOANA MISY",
-			"small": "Azonao atao ny misafidy ny fitsaboana amin'ireto lisitra ireto"
+			"small": "Azonao atao ny misafidy ny fitsaboana amin'ireto lisitra ireto",
+            "confirm": "Azonao antoka ve fa ho esorinao io fitsaboana io?"
 		},
 		"public":{
 			"message": "Mbola tsy misy lisitra na fitsaboana aminito sokajy ito",
@@ -21,7 +22,8 @@
 	},
     "listTreatmentCategory":{
         "doctor":{
-            "titleMain": "Hanampy sokajy na fitsaboana vaovao"
+            "titleMain": "Hanampy sokajy na fitsaboana vaovao",
+            "confirm": "Azonao antoka ve fa ho esorinao io sokajy na fitsaboana io?"
         },
         "public":{
             "title": "SOKAJY NA FOMBA FITSABOANA MISY",
@@ -59,5 +61,14 @@
         "create":{
             "title": "Hamorona fitsaboana vaovao"
         }
+    },
+    "signIn":{
+        "title": "Tsy maintsy miditra ianao raha te hanohy.",
+        "email": "Adiresy mailaka",
+        "password": "Teny miafina",
+        "error": "Tsy tokony ho foana ny saha",
+        "button1": "Akatona",
+        "button2": "Hiditra",
+        "renderError": "Misy diso ilay E-mail na ilay teny miafina."
     }
 }

@@ -88,7 +88,12 @@ function ListTreatment (props) {
 												{
 													path==='/doctor' ? 
 														<React.Fragment>
-															<FaTrash onClick={e => toDestroyTreatment(e,treatment.id)}/>
+															<FaTrash onClick={ e => {
+																let isTrue = window.confirm(`${t("listTreatment.doctor.confirm")}`);
+																if(isTrue===true){
+																	toDestroyTreatment(e,treatment.id)
+																}
+															}} />
 															<FaEdit data-toggle="modal" data-target={`#exampleModalCenter${treatment.id}`} />
 															<CreateTreatment treatmentItem={treatment} treatmentCategory={props.treatmentCategory} />
 														</React.Fragment>
